@@ -26,7 +26,7 @@ Control+Shift+J-输入Json-Enter
 
 效果：
 
-![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot.gif)
+![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot2.gif)
 
 图中的Json格式
 ~~~
