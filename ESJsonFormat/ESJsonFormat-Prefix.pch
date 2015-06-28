@@ -1,0 +1,29 @@
+//
+//  ESJsonFormat-Prefix.pch
+//  ESJsonFormat
+//
+//  Created by 尹桥印 on 15/6/28.
+//  Copyright (c) 2015年 EnjoySR. All rights reserved.
+//
+
+#ifndef ESJsonFormat_ESJsonFormat_Prefix_pch
+#define ESJsonFormat_ESJsonFormat_Prefix_pch
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#endif
+
+
+#if 1
+#define __DEBUG__
+#endif
+
+#ifdef __DEBUG__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) do{} while(0)
+#endif
+
+
+#endif
