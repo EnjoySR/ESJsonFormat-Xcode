@@ -1,19 +1,21 @@
-# ESJsonFormat-Xcode
+### ESJsonFormat-Xcode
 将Json格式化输出为模型的属性
 
-怎么安装：
+####怎么安装：
 
 下载-Xcode打开-Command+B-重启Xcode
 
-怎么使用：
+####怎么使用：
 
 Window-ESJsonFormat-输入Json-Enter
 
-或者：
+or
 
-Control+Shift+J-输入Json-Enter
+快捷键(Control+Shift+J)-输入Json-Enter
 
-功能说明：
+![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot1.png)
+
+####功能说明：
 > -0.1
 
 > 1.通过Json字符串生成对应属性
@@ -24,7 +26,7 @@ Control+Shift+J-输入Json-Enter
 
 注：目前只支持Objective-C
 
-效果：
+####效果：
 
 ![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot2.gif)
 
@@ -53,7 +55,7 @@ Control+Shift+J-输入Json-Enter
 }
 ~~~
 
-计划实现：
+####计划实现：
 
 > 1.支持Swift
 
