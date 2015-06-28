@@ -3,15 +3,15 @@
 
 怎么安装：
 
-下载-Xcode打开-command+B-重启Xcode
+下载-Xcode打开-Command+B-重启Xcode
 
 怎么使用：
 
-window菜单-ESJsonFormat-输入json-enter
+Window-ESJsonFormat-输入Json-Enter
 
 或者：
 
-control+shift+j-输入json-enter
+Control+Shift+J-输入Json-Enter
 
 功能说明：
 > -0.1
@@ -28,6 +28,31 @@ control+shift+j-输入json-enter
 
 ![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot.gif)
 
+图中的Json格式
+~~~
+{
+    "name": "王五",
+    "gender": "man",
+    "age": 15,
+    "height": "140cm",
+    "addr": {
+        "province": "fujian",
+        "city": "quanzhou",
+        "code": "300000"
+    },
+    "hobby": [
+        {
+            "name": "billiards",
+            "code": "1"
+        },
+        {
+            "name": "computerGame",
+            "code": "2"
+        }
+    ]
+}
+~~~
+
 计划实现：
 
 > 1.支持Swift
@@ -36,3 +61,4 @@ control+shift+j-输入json-enter
 
 > 3.生成MJExtension中集合对应的Class的方法
 
+Thanks：[GsonFormat](https://github.com/zzz40500/GsonFormat)、[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)
