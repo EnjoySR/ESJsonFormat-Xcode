@@ -74,9 +74,9 @@
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
         if ([obj isKindOfClass:[NSArray class]] || [obj isKindOfClass:[NSDictionary class]]) {
             ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
-            NSString *msg = [NSString stringWithFormat:@"The '%@' child items className is:",key];
+            NSString *msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
             if ([obj isKindOfClass:[NSDictionary class]]) {
-                msg = [NSString stringWithFormat:@"The '%@' correspond className is:",key];
+                msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
             }
             [dialog setDataWithMsg:msg defaultClassName:[key capitalizedString] useDefault:^(NSString *className){
                 if (![className isEqualToString:key]) {
