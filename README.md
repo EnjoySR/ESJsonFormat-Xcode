@@ -3,15 +3,14 @@
 
 ####怎么安装：
 
-下载-Xcode打开-Command+B-重启Xcode
+方式1：下载-Xcode打开-Command+B-重启Xcode
+
+方式2：下载-解压plugin文件夹中zip到`~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`-重启Xcode
+
 
 ####怎么使用：
 
-Window-ESJsonFormat-输入Json-Enter
-
-or
-
-快捷键(Control+Shift+J)-输入Json-Enter
+Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入Json-Enter
 
 ![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot1.png)
 
