@@ -18,13 +18,16 @@ or
 ####功能说明：
 > -0.1
 
-> 1.通过Json字符串生成对应属性
+* 1.通过Json字符串生成对应属性
 
-> 2.通过文件写入的方式生成到.m文件
+* 2.通过文件写入的方式生成到.m文件
 
-> 3.支持输入嵌套模型名称
+* 3.支持输入嵌套模型名称
 
 注：目前只支持Objective-C
+
+####Alcatraz
+* 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
 
 ####效果：
 
@@ -57,10 +60,10 @@ or
 
 ####计划实现：
 
-> 1.支持Swift
+* 1.支持Swift
 
-> 2.将嵌套模型生成文件
+* 2.将嵌套模型生成文件
 
-> 3.生成MJExtension中集合对应的Class的方法
+* 3.生成MJExtension中集合对应的Class的方法
 
 Thanks：[GsonFormat](https://github.com/zzz40500/GsonFormat)、[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)
