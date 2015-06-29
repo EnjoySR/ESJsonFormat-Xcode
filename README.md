@@ -28,10 +28,24 @@ or
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
 
 ####效果：
+简单模型
 
-![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot2.gif)
+![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/ScreenShot3.gif)
+
+复杂模型
+
+![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/ScreenShot2.gif)
 
 图中的Json格式
+~~~
+{
+    "name": "王五",
+    "gender": "man",
+    "age": 15,
+    "height": "140cm",
+}
+~~~
+
 ~~~
 {
     "name": "王五",
