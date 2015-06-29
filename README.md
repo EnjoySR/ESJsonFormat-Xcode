@@ -26,6 +26,8 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 ####Alcatraz
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
 
+![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/ScreenShot4.png)
+
 ####效果：
 简单模型
 
