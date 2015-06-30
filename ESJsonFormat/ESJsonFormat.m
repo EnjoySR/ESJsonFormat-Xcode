@@ -38,7 +38,7 @@
                                                  selector:@selector(didApplicationFinishLaunchingNotification:)
                                                      name:NSApplicationDidFinishLaunchingNotification
                                                    object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:@"FUCK" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:Noti_ESFormatResult object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
     }
     return self;

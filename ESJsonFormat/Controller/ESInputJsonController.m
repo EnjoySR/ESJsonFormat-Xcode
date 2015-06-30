@@ -66,7 +66,7 @@
         engine.replaceClassNames = [NSDictionary dictionaryWithDictionary:self.replaceClassNames];
         self.replaceClassNames = nil;
         ESFormatInfo *info = [engine parseWithDic:dic];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FUCK" object:info];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Noti_ESFormatResult object:info];
     }
 }
 -(NSDictionary *)dealNameWithDictionary:(NSDictionary *)dictionary{

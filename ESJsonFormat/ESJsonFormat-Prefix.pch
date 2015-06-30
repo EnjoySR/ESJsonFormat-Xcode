@@ -15,7 +15,7 @@
 #endif
 
 
-#if 1
+#if 0
 #define __DEBUG__
 #endif
 
@@ -25,5 +25,6 @@
 #define NSLog(...) do{} while(0)
 #endif
 
+#define Noti_ESFormatResult @"Noti_ESFormatResult"
 
 #endif
