@@ -8,7 +8,7 @@
 
 #import "ESDialogController.h"
 
-@interface ESDialogController ()<NSWindowDelegate>
+@interface ESDialogController ()<NSWindowDelegate,NSTextFieldDelegate>
 @property (weak) IBOutlet NSTextField *msgLabel;
 @property (weak) IBOutlet NSTextField *classNameField;
 
@@ -18,6 +18,7 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.classNameField.delegate = self;
     self.window.delegate = self;
     self.msgLabel.stringValue = self.msg;
     self.classNameField.stringValue = self.className;
@@ -50,6 +51,14 @@
     [[self window] orderOut:nil];
 }
 
+
+#pragma mark - nstextfiled delegate
+
+-(void)controlTextDidEndEditing:(NSNotification *)notification{
+    if ( [[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement){
+        [self enterBtnClick:nil];
+    }
+}
 
 
 @end
