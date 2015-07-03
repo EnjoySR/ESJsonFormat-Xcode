@@ -5,7 +5,9 @@
 
 方式1：下载-Xcode打开-Command+B-重启Xcode
 
-方式2：下载-解压plugin文件夹中zip到`~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`-重启Xcode
+方式2：通过[Alcatraz](http://alcatraz.io/)安装，搜索 `ESJsonFormat`
+
+方式3：下载-解压plugin文件夹中zip到`~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`-重启Xcode
 
 
 ####怎么使用：
