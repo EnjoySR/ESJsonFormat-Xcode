@@ -1,6 +1,11 @@
 ### ESJsonFormat-Xcode
 将Json格式化输出为模型的属性
 
+**写在之前的注意**
+> * **Json中的key对应的value为Null的话会格式化成NSString类型**
+> * **格式化之前光标放在你需要添加属性的地方**
+> * **RootClass需要自己手动创建，插件只负责RootClass里面的属性生成**
+
 ####怎么安装：
 
 方式1：下载-Xcode打开-Command+B-重启Xcode
@@ -11,6 +16,8 @@
 
 
 ####怎么使用：
+
+
 
 Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入Json-Enter
 
@@ -23,7 +30,11 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 通过文件写入的方式生成到.m文件
 * 支持输入嵌套模型名称
 
-注：目前只支持Objective-C
+> -0.2
+
+* 支持Swift
+* 修复json的value的值为Null的时候多出来的空行
+* 修复BOOL类型值格式化失效问题
 
 ####Alcatraz
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
@@ -75,8 +86,14 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 
 ####计划实现：
 
-* 支持Swift
-* 将嵌套模型生成文件
 * 生成MJExtension中集合对应的Class的方法
+* 将嵌套模型生成文件
+
+####其他：
+
+* 如在使用过程中需要到问题，请你Issues我。
+* 有什么好的想法也可以Issues我。
+* 如果你半夜睡不着觉也可以Issues我。
+
 
 Thanks：[GsonFormat](https://github.com/zzz40500/GsonFormat)、[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)
