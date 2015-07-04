@@ -79,32 +79,44 @@
 /**
  *  Set class name
  */
--(NSDictionary *)dealNameWithDictionary:(NSDictionary *)dictionary{
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-    [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-        if ([obj isKindOfClass:[NSArray class]] || [obj isKindOfClass:[NSDictionary class]]) {
-            ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
-            NSString *msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
-            }
-            [dialog setDataWithMsg:msg defaultClassName:[key capitalizedString] useDefault:^(NSString *className){
-                if (![className isEqualToString:key]) {
-                    self.replaceClassNames[key] = className;
+-(NSDictionary *)dealNameWithDictionary:(id)datas{
+    
+    if ([datas isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:datas];
+        [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            if ([obj isKindOfClass:[NSArray class]] || [obj isKindOfClass:[NSDictionary class]]) {
+                ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
+                NSString *msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
+                if ([obj isKindOfClass:[NSDictionary class]]) {
+                    msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
                 }
-            } enter:^(NSString *className) {
-                if (![className isEqualToString:key]) {
-                    self.replaceClassNames[key] = className;
+                [dialog setDataWithMsg:msg defaultClassName:[key capitalizedString] useDefault:nil enter:^(NSString *className) {
+                    if (![className isEqualToString:key]) {
+                        self.replaceClassNames[key] = className;
+                    }
+                }];
+                [NSApp beginSheet:[dialog window] modalForWindow:[NSApp mainWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+                [NSApp runModalForWindow:[dialog window]];
+                if ([obj isKindOfClass:[NSDictionary class]]) {
+                    [dic setObject:[self dealNameWithDictionary:obj] forKey:key];
                 }
-            }];
-            [NSApp beginSheet:[dialog window] modalForWindow:[NSApp mainWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
-            [NSApp runModalForWindow:[dialog window]];
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                [dic setObject:[self dealNameWithDictionary:obj] forKey:key];
             }
-        }
-    }];
-    return dic;
+        }];
+        return dic;
+    }else if([datas isKindOfClass:[NSArray class]]){
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
+        NSString *msg = [NSString stringWithFormat:@"The json is an array,root class name is:"];
+        [dialog setDataWithMsg:msg defaultClassName:@"ESModal" useDefault:nil enter:^(NSString *className) {
+            NSString *lowerStr = [className lowercaseString];
+            dic[lowerStr] = datas;
+            self.replaceClassNames[lowerStr] = className;
+        }];
+        [NSApp beginSheet:[dialog window] modalForWindow:[NSApp mainWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+        [NSApp runModalForWindow:[dialog window]];
+        return dic;
+    }
+    return nil;
 }
 
 -(void)close{

@@ -12,7 +12,6 @@
 #import "ESInputJsonController.h"
 #import "ESPbxprojInfo.h"
 
-
 @interface ESJsonFormat()<ESInputJsonControllerDelegate>
 @property (nonatomic, strong) ESInputJsonController *inputCtrl;
 @property (nonatomic, strong) id eventMonitor;
@@ -21,6 +20,7 @@
 @property (nonatomic, copy) NSString *currentProjectPath;
 @property (nonatomic) NSTextView *currentTextView;
 @property (nonatomic, assign) BOOL notiTag;
+
 @end
 
 @implementation ESJsonFormat
@@ -44,6 +44,7 @@
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:ESFormatResultNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
+        
     }
     instance = self;
     return self;
@@ -67,10 +68,6 @@
         }else{
             self.swift = NO;
         }
-    }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
-        //Get project.pbxproj info
-        self.currentProjectPath = [notify.object valueForKey:@"path"];
-        [[ESPbxprojInfo shareInstance] setParamsWithPath:[self.currentProjectPath stringByAppendingPathComponent:@"project.pbxproj"]];
     }
 }
 

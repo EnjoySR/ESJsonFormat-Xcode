@@ -12,6 +12,7 @@
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#import "NSString+ESExtension.h"
 #endif
 
 

@@ -24,7 +24,6 @@ static ESPbxprojInfo *instance;
 -(void)setParamsWithPath:(NSString *)path{
     NSData *pbxprojData = [NSData dataWithContentsOfFile:path];
     NSString *pbxprojStr = [[NSString alloc] initWithData:pbxprojData encoding:NSUTF8StringEncoding];
-    NSLog(@"pbxprojstr = %@",pbxprojStr);
     _classPrefix = [self matchStringWithKeyWord:@"CLASSPREFIX" matchInString:pbxprojStr];
     _organizationName = [self matchStringWithKeyWord:@"ORGANIZATIONNAME" matchInString:pbxprojStr];
 }

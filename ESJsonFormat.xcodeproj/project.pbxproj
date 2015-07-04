@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FDBA00D1B47BA8E00FAEBE9 /* NSString+ESExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBA00C1B47BA8E00FAEBE9 /* NSString+ESExtension.m */; };
 		4FF8F33E1B400F8B005C73C2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF8F33D1B400F8B005C73C2 /* AppKit.framework */; };
 		4FF8F3401B400F8B005C73C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF8F33F1B400F8B005C73C2 /* Foundation.framework */; };
 		4FF8F3451B400F8B005C73C2 /* ESJsonFormat.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 4FF8F3441B400F8B005C73C2 /* ESJsonFormat.xcscheme */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4FDBA00B1B47BA8E00FAEBE9 /* NSString+ESExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ESExtension.h"; sourceTree = "<group>"; };
+		4FDBA00C1B47BA8E00FAEBE9 /* NSString+ESExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ESExtension.m"; sourceTree = "<group>"; };
 		4FF8F33A1B400F8B005C73C2 /* ESJsonFormat.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESJsonFormat.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF8F33D1B400F8B005C73C2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		4FF8F33F1B400F8B005C73C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -144,6 +147,8 @@
 			children = (
 				4FF8F3701B401487005C73C2 /* NSObject_Extension.h */,
 				4FF8F3711B401487005C73C2 /* NSObject_Extension.m */,
+				4FDBA00B1B47BA8E00FAEBE9 /* NSString+ESExtension.h */,
+				4FDBA00C1B47BA8E00FAEBE9 /* NSString+ESExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				4FF8F36B1B4012DC005C73C2 /* ESJsonFormatManager.m in Sources */,
 				4FF8F3581B40100C005C73C2 /* ESDialogController.m in Sources */,
 				4FF8F3751B4014AB005C73C2 /* ESPbxprojInfo.m in Sources */,
+				4FDBA00D1B47BA8E00FAEBE9 /* NSString+ESExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -138,11 +138,9 @@
     [dic enumerateKeysAndObjectsUsingBlock:^(id key, NSObject *obj, BOOL *stop) {
         [resultStr appendFormat:@"\n%@\n",[self formatSwiftWithKey:key value:obj]];
     }];
-    if (!self.isCreateNewFile) {
         for (ESClassInfo *info in self.classArray) {
             [resultStr appendString:[NSString stringWithFormat:@"\n}\n\n%@",[self parseSwiftClassWithClassInfo:info]]];
         }
-    }
     self.formatInfo.pasteboardContent = resultStr;
     return self.formatInfo;
 }

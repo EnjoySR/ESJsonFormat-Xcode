@@ -9,7 +9,5 @@
 #import "ESClassInfo.h"
 
 @implementation ESClassInfo
--(void)setClassName:(NSString *)className{
-    _className = [className capitalizedString];
-}
+
 @end
