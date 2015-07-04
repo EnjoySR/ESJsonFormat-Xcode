@@ -12,6 +12,7 @@
 #import "ESInputJsonController.h"
 #import "ESPbxprojInfo.h"
 
+
 @interface ESJsonFormat()<ESInputJsonControllerDelegate>
 @property (nonatomic, strong) ESInputJsonController *inputCtrl;
 @property (nonatomic, strong) id eventMonitor;
@@ -24,9 +25,12 @@
 
 @implementation ESJsonFormat
 
-+ (instancetype)sharedPlugin
-{
++ (instancetype)sharedPlugin{
     return sharedPlugin;
+}
+
++ (instancetype)instance{
+    return instance;
 }
 
 - (id)initWithBundle:(NSBundle *)plugin
@@ -41,6 +45,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:Noti_ESFormatResult object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
     }
+    instance = self;
     return self;
 }
 
@@ -53,10 +58,15 @@
             self.currentTextView = text;
         }
     }else if ([notify.name isEqualToString:@"IDEEditorDocumentDidChangeNotification"]){
+        //Track the current open paths
         NSObject *object = notify.userInfo[@"IDEEditorDocumentChangeLocationsKey"];
         NSString *path = [[[object valueForKey:@"documentURL"] firstObject] absoluteString];
         self.currentFilePath = path;
+        if ([self.currentFilePath hasSuffix:@"swift"]) {
+            self.swift = YES;
+        }
     }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
+        //Get project.pbxproj info
         self.currentProjectPath = [notify.object valueForKey:@"path"];
         [[ESPbxprojInfo shareInstance] setParamsWithPath:[self.currentProjectPath stringByAppendingPathComponent:@"project.pbxproj"]];
     }
@@ -65,17 +75,25 @@
 -(void)outputResult:(NSNotification*)noti{
     if (!self.currentTextView) return;
     ESFormatInfo *info =  noti.object;
-    if (self.currentFilePath.length>0 && info.writeToMContent.length>0) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@m",[self.currentFilePath substringWithRange:NSMakeRange(0, self.currentFilePath.length-1)]] ;
-        NSURL *writeUrl = [NSURL URLWithString:urlStr];
-        NSString *currentContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
-        NSMutableString *newContent = [NSMutableString stringWithFormat:@"%@\n%@",currentContent,info.writeToMContent];
-        [newContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    }
-    [self.currentTextView insertText:info.pasteboardContent];
-    if (info.atClassContent.length>0) {
-        NSRange atInsertRange = [self.currentTextView.string rangeOfString:@"\n@interface"];
-        [self.currentTextView insertText:info.atClassContent replacementRange:NSMakeRange(atInsertRange.location, 0)];
+    
+    if (!self.isSwift) {
+        if (self.currentFilePath.length>0 && info.writeToMContent.length>0) {
+            //write to '.m'
+            NSString *urlStr = [NSString stringWithFormat:@"%@m",[self.currentFilePath substringWithRange:NSMakeRange(0, self.currentFilePath.length-1)]] ;
+            NSURL *writeUrl = [NSURL URLWithString:urlStr];
+            NSString *currentContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
+            NSMutableString *newContent = [NSMutableString stringWithFormat:@"%@\n%@",currentContent,info.writeToMContent];
+            [newContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        }
+        [self.currentTextView insertText:info.pasteboardContent];
+        if (info.atClassContent.length>0) {
+            //add atclass
+            NSRange atInsertRange = [self.currentTextView.string rangeOfString:@"\n@interface"];
+            [self.currentTextView insertText:info.atClassContent replacementRange:NSMakeRange(atInsertRange.location, 0)];
+        }
+    }else{
+        //swift
+        [self.currentTextView insertText:info.pasteboardContent];
     }
 }
 

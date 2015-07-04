@@ -9,6 +9,7 @@
 #import "ESInputJsonController.h"
 #import "ESDialogController.h"
 #import "ESJsonFormatManager.h"
+#import "ESJsonFormat.h"
 
 @interface ESInputJsonController ()<NSTextViewDelegate,NSWindowDelegate>
 
@@ -65,10 +66,19 @@
         ESJsonFormatManager *engine = [[ESJsonFormatManager alloc] initWithCreateToFile:NO];
         engine.replaceClassNames = [NSDictionary dictionaryWithDictionary:self.replaceClassNames];
         self.replaceClassNames = nil;
-        ESFormatInfo *info = [engine parseWithDic:dic];
+        ESFormatInfo *info = nil;
+        if ([ESJsonFormat instance].isSwift) {
+            info = [engine parseSwiftWithDic:dic];
+        }else{
+            info = [engine parseObjcWithDic:dic];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:Noti_ESFormatResult object:info];
     }
 }
+
+/**
+ *  Set class name
+ */
 -(NSDictionary *)dealNameWithDictionary:(NSDictionary *)dictionary{
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:dictionary];
     [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
@@ -117,6 +127,9 @@
 }
 
 
+/**
+ *  Determine whether a valid json
+ */
 -(id)dictionaryWithJsonStr:(NSString *)jsonString{
     jsonString = [[jsonString stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"jsonString=%@",jsonString);

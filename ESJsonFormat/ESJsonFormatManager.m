@@ -36,25 +36,34 @@
     return [self initWithCreateToFile:NO];
 }
 
-- (ESFormatInfo *)parseWithDic:(NSDictionary *)dic{
+#pragma mark - Format Objc
+- (ESFormatInfo *)parseObjcWithDic:(NSDictionary *)dic{
     NSMutableString *resultStr = [NSMutableString string];
     [dic enumerateKeysAndObjectsUsingBlock:^(id key, NSObject *obj, BOOL *stop) {
-        [resultStr appendFormat:@"\n%@\n",[self formatWithKey:key value:obj]];
+        [resultStr appendFormat:@"\n%@\n",[self formatObjcWithKey:key value:obj]];
     }];
     if (!self.isCreateNewFile) {
         for (ESClassInfo *info in self.classArray) {
-            [resultStr appendString:[NSString stringWithFormat:@"\n@end\n\n%@",[self parseClassWithClassInfo:info]]];
+            [resultStr appendString:[NSString stringWithFormat:@"\n@end\n\n%@",[self parseObjcClassWithClassInfo:info]]];
         }
     }
     self.formatInfo.pasteboardContent = resultStr;
     return self.formatInfo;
 }
 
-- (NSString *)formatWithKey:(NSString *)key value:(NSObject *)value{
+/**
+ *  Formatting with keys and values --Swift
+ */
+- (NSString *)formatObjcWithKey:(NSString *)key value:(NSObject *)value{
     NSString *qualifierStr = @"copy";
     NSString *typeStr = @"NSString";
     if ([value isKindOfClass:[NSString class]]) {
         return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
+    }else if([value isKindOfClass:[@(YES) class]]){
+        //the 'NSCFBoolean' is private subclass of 'NSNumber'
+        qualifierStr = @"assign";
+        typeStr = @"BOOL";
+        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ %@;",qualifierStr,typeStr,key];
     }else if([value isKindOfClass:[NSNumber class]]){
         qualifierStr = @"assign";
         NSString *valueStr = [NSString stringWithFormat:@"%@",value];
@@ -92,18 +101,15 @@
         info.classDic = (NSDictionary *)value;
         [self.classArray addObject:info];
         return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
-    }else if([value isKindOfClass:[@(YES) class]]){
-        qualifierStr = @"assign";
-        typeStr = @"BOOL";
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ %@;",qualifierStr,typeStr,key];
     }
-    return @"";
+    return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
 }
 
--(NSString *)parseClassWithClassInfo:(ESClassInfo *)classInfo{
+
+-(NSString *)parseObjcClassWithClassInfo:(ESClassInfo *)classInfo{
     ESJsonFormatManager *engine = [[ESJsonFormatManager alloc] initWithCreateToFile:self.createNewFile];
     engine.replaceClassNames = [NSDictionary dictionaryWithDictionary:self.replaceClassNames];
-    ESFormatInfo *classFormatInfo = [engine parseWithDic:classInfo.classDic];
+    ESFormatInfo *classFormatInfo = [engine parseObjcWithDic:classInfo.classDic];
     
     NSMutableString *result = [NSMutableString stringWithFormat:@"@interface %@ : NSObject\n",classInfo.className];
     [result appendString:classFormatInfo.pasteboardContent];
@@ -124,5 +130,78 @@
     return result;
 }
 
+
+#pragma mark - Format Swift
+- (ESFormatInfo *)parseSwiftWithDic:(NSDictionary *)dic{
+    NSMutableString *resultStr = [NSMutableString string];
+    
+    [dic enumerateKeysAndObjectsUsingBlock:^(id key, NSObject *obj, BOOL *stop) {
+        [resultStr appendFormat:@"\n%@\n",[self formatSwiftWithKey:key value:obj]];
+    }];
+    if (!self.isCreateNewFile) {
+        for (ESClassInfo *info in self.classArray) {
+            [resultStr appendString:[NSString stringWithFormat:@"\n}\n\n%@",[self parseSwiftClassWithClassInfo:info]]];
+        }
+    }
+    self.formatInfo.pasteboardContent = resultStr;
+    return self.formatInfo;
+}
+
+/**
+ * Formatting with keys and values --Swift
+ */
+- (NSString *)formatSwiftWithKey:(NSString *)key value:(NSObject *)value{
+    NSString *typeStr = @"String?";
+    
+    if ([value isKindOfClass:[NSString class]]) {
+        return [NSString stringWithFormat:@"    var %@: %@",key,typeStr];
+    }else if([value isKindOfClass:[@(YES) class]]){
+        typeStr = @"Bool";
+        return [NSString stringWithFormat:@"    var %@: %@ = false",key,typeStr];
+    }else if([value isKindOfClass:[NSNumber class]]){
+        NSString *valueStr = [NSString stringWithFormat:@"%@",value];
+        if ([valueStr rangeOfString:@"."].location!=NSNotFound){
+            typeStr = @"Double?";
+        }else{
+            typeStr = @"Int?";
+        }
+        return [NSString stringWithFormat:@"    var %@: %@ = 0",key,typeStr];
+    }else if([value isKindOfClass:[NSArray class]]){
+        NSArray *array = (NSArray *)value;
+        
+        ESClassInfo *info = [[ESClassInfo alloc] init];
+        info.className = self.replaceClassNames[key];
+        info.classDic = [array firstObject];
+        [self.classArray addObject:info];
+        
+        return [NSString stringWithFormat:@"    var %@: [%@]?",key,self.replaceClassNames[key]];
+    }else if ([value isKindOfClass:[NSDictionary class]]){
+        typeStr = self.replaceClassNames[key];
+        if (!typeStr) {
+            typeStr = [key capitalizedString];
+        }
+        
+        ESClassInfo *info = [[ESClassInfo alloc] init];
+        info.className = typeStr;
+        info.classDic = (NSDictionary *)value;
+        [self.classArray addObject:info];
+        
+        return [NSString stringWithFormat:@"    var %@: %@?",key,typeStr];
+    }
+    return [NSString stringWithFormat:@"    var %@: %@",key,typeStr];
+}
+
+-(NSString *)parseSwiftClassWithClassInfo:(ESClassInfo *)classInfo{
+    ESJsonFormatManager *engine = [[ESJsonFormatManager alloc] initWithCreateToFile:self.createNewFile];
+    engine.replaceClassNames = [NSDictionary dictionaryWithDictionary:self.replaceClassNames];
+    ESFormatInfo *classFormatInfo = [engine parseSwiftWithDic:classInfo.classDic];
+    
+    NSMutableString *result = [NSMutableString stringWithFormat:@"class %@: NSObject {\n",classInfo.className];
+    [result appendString:classFormatInfo.pasteboardContent];
+    
+    [self.formatInfo.classInfoArray addObjectsFromArray:classFormatInfo.classInfoArray];
+    [self.formatInfo.classInfoArray addObject:classInfo];
+    return result;
+}
 
 @end

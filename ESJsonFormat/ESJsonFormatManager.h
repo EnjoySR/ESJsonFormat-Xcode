@@ -14,5 +14,6 @@
 @property (nonatomic, assign, getter=isCreateNewFile) BOOL createNewFile;
 
 -(instancetype)initWithCreateToFile:(BOOL)createToFile;
-- (ESFormatInfo *)parseWithDic:(NSDictionary *)dic;
+- (ESFormatInfo *)parseObjcWithDic:(NSDictionary *)dic;
+- (ESFormatInfo *)parseSwiftWithDic:(NSDictionary *)dic;
 @end
