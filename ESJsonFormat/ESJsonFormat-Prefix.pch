@@ -25,6 +25,6 @@
 #define NSLog(...) do{} while(0)
 #endif
 
-#define Noti_ESFormatResult @"Noti_ESFormatResult"
+#define ESFormatResultNotification @"ESFormatResultNotification"
 
 #endif

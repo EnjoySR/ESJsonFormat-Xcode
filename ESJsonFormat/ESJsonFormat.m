@@ -42,7 +42,7 @@
                                                  selector:@selector(didApplicationFinishLaunchingNotification:)
                                                      name:NSApplicationDidFinishLaunchingNotification
                                                    object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:Noti_ESFormatResult object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:ESFormatResultNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
     }
     instance = self;
@@ -64,6 +64,8 @@
         self.currentFilePath = path;
         if ([self.currentFilePath hasSuffix:@"swift"]) {
             self.swift = YES;
+        }else{
+            self.swift = NO;
         }
     }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
         //Get project.pbxproj info

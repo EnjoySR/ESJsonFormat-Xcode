@@ -72,7 +72,7 @@
         }else{
             info = [engine parseObjcWithDic:dic];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:Noti_ESFormatResult object:info];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ESFormatResultNotification object:info];
     }
 }
 
