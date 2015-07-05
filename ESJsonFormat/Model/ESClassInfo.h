@@ -11,4 +11,6 @@
 @interface ESClassInfo : NSObject
 @property (nonatomic, copy) NSString *className;
 @property (nonatomic, strong) NSDictionary *classDic;
+
+- (instancetype)initWithClassName:(NSString *)className classDic:(NSDictionary *)classDic;
 @end

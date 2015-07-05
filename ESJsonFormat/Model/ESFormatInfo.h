@@ -12,6 +12,7 @@
 @property (nonatomic, assign, readonly, getter=isCreateNewFile) BOOL createNewFile;
 @property (nonatomic, copy) NSString *pasteboardContent;
 @property (nonatomic, copy) NSString *writeToMContent;
+@property (nonatomic, copy) NSString *rootClassImplementMethodOfMJExtensionContent;
 @property (nonatomic, strong) NSMutableArray *classInfoArray;
 @property (nonatomic, copy) NSString *atClassContent;
 

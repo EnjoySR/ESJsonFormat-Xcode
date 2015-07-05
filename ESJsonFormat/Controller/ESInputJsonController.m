@@ -10,10 +10,13 @@
 #import "ESDialogController.h"
 #import "ESJsonFormatManager.h"
 #import "ESJsonFormat.h"
+#import "ESClassInfo.h"
+#import "ESPair.h"
 
 @interface ESInputJsonController ()<NSTextViewDelegate,NSWindowDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *replaceClassNames;
+@property (nonatomic, strong) NSMutableDictionary *implementMethodOfMJExtensionClassNames;
 
 @property (unsafe_unretained) IBOutlet NSTextView *inputTextView;
 
@@ -34,6 +37,13 @@
         _replaceClassNames = [NSMutableDictionary dictionary];
     }
     return _replaceClassNames;
+}
+
+-(NSMutableDictionary *)implementMethodOfMJExtensionClassNames{
+    if (!_implementMethodOfMJExtensionClassNames) {
+        _implementMethodOfMJExtensionClassNames = [NSMutableDictionary dictionary];
+    }
+    return _implementMethodOfMJExtensionClassNames;
 }
 
 - (void)windowDidLoad {
@@ -61,10 +71,18 @@
         [alert runModal];
         NSLog(@"Error：Json is invalid");
     }else{
-        NSDictionary *dic = [self dealNameWithDictionary:result];
+        NSDictionary *dic = nil;
+        if ([result isKindOfClass:[NSArray class]]) {
+            dic = [self dealNameWithDictionary:result];
+        }else{
+            ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:ESRootClassName classDic:result];
+            dic = [self dealNameWithDictionary:classInfo];
+        }
+        
         [self close];
         ESJsonFormatManager *engine = [[ESJsonFormatManager alloc] initWithCreateToFile:NO];
         engine.replaceClassNames = [NSDictionary dictionaryWithDictionary:self.replaceClassNames];
+        engine.implementMethodOfMJExtensionClassNamesDic = [NSDictionary dictionaryWithDictionary:self.implementMethodOfMJExtensionClassNames];
         self.replaceClassNames = nil;
         ESFormatInfo *info = nil;
         if ([ESJsonFormat instance].isSwift) {
@@ -80,25 +98,42 @@
  *  Set class name
  */
 -(NSDictionary *)dealNameWithDictionary:(id)datas{
-    
-    if ([datas isKindOfClass:[NSDictionary class]]) {
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:datas];
+    if ([datas isKindOfClass:[ESClassInfo class]]) {
+        ESClassInfo *classInfo = datas;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:classInfo.classDic];
         [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
             if ([obj isKindOfClass:[NSArray class]] || [obj isKindOfClass:[NSDictionary class]]) {
                 ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
-                NSString *msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
-                if ([obj isKindOfClass:[NSDictionary class]]) {
-                    msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
+                NSString *msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
+                if ([obj isKindOfClass:[NSArray class]]) {
+                    dialog.objIsKindOfArray = YES;
+                    msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
                 }
-                [dialog setDataWithMsg:msg defaultClassName:[key capitalizedString] useDefault:nil enter:^(NSString *className) {
+                __block NSString *childClassName;//Record the current class name
+                [dialog setDataWithMsg:msg defaultClassName:[key capitalizedString] enter:^(NSString *className,BOOL isImplementMethodOfMJExtension) {
                     if (![className isEqualToString:key]) {
                         self.replaceClassNames[key] = className;
                     }
+                    if (isImplementMethodOfMJExtension) {
+                        NSMutableArray *array = [NSMutableArray arrayWithObject:[ESPair createWithFirst:key second:className]];
+                        if (self.implementMethodOfMJExtensionClassNames[classInfo.className]) {
+                            [array addObjectsFromArray:self.implementMethodOfMJExtensionClassNames[classInfo.className]];
+                        }
+                        self.implementMethodOfMJExtensionClassNames[classInfo.className] = array;
+                    }
+                    childClassName = className;
                 }];
                 [NSApp beginSheet:[dialog window] modalForWindow:[NSApp mainWindow] modalDelegate:nil didEndSelector:nil contextInfo:nil];
                 [NSApp runModalForWindow:[dialog window]];
                 if ([obj isKindOfClass:[NSDictionary class]]) {
-                    [dic setObject:[self dealNameWithDictionary:obj] forKey:key];
+                    ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:obj];
+                    [dic setObject:[self dealNameWithDictionary:classInfo] forKey:key];
+                }else if([obj isKindOfClass:[NSArray class]]){
+                    NSArray *array = obj;
+                    if (array.firstObject) {
+                        ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:[array firstObject]];
+                        [dic setObject:[self dealNameWithDictionary:classInfo] forKey:key];
+                    }
                 }
             }
         }];
@@ -107,7 +142,7 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
         NSString *msg = [NSString stringWithFormat:@"The json is an array,root class name is:"];
-        [dialog setDataWithMsg:msg defaultClassName:@"ESModal" useDefault:nil enter:^(NSString *className) {
+        [dialog setDataWithMsg:msg defaultClassName:@"ESModal" enter:^(NSString *className,BOOL isImplementMethodOfMJExtension) {
             NSString *lowerStr = [className lowercaseString];
             dic[lowerStr] = datas;
             self.replaceClassNames[lowerStr] = className;

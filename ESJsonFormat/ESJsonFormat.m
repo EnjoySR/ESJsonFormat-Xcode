@@ -80,8 +80,16 @@
             //write to '.m'
             NSString *urlStr = [NSString stringWithFormat:@"%@m",[self.currentFilePath substringWithRange:NSMakeRange(0, self.currentFilePath.length-1)]] ;
             NSURL *writeUrl = [NSURL URLWithString:urlStr];
-            NSString *currentContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
-            NSMutableString *newContent = [NSMutableString stringWithFormat:@"%@\n%@",currentContent,info.writeToMContent];
+            //The original content
+            NSString *originalContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
+            
+            if (info.rootClassImplementMethodOfMJExtensionContent.length>0) {
+                NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
+                originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(lastEndRange.location, 0) withString:info.rootClassImplementMethodOfMJExtensionContent];
+            }
+            
+            //Append new content
+            NSMutableString *newContent = [NSMutableString stringWithFormat:@"%@\n%@",originalContent,info.writeToMContent];
             [newContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
         }
         [self.currentTextView insertText:info.pasteboardContent];

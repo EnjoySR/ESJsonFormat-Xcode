@@ -11,6 +11,8 @@
 @interface ESJsonFormatManager : NSObject
  
 @property (nonatomic, strong) NSDictionary *replaceClassNames;
+@property (nonatomic, strong) NSDictionary *implementMethodOfMJExtensionClassNamesDic;
+
 @property (nonatomic, assign, getter=isCreateNewFile) BOOL createNewFile;
 
 -(instancetype)initWithCreateToFile:(BOOL)createToFile;

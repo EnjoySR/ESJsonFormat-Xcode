@@ -11,10 +11,11 @@
 @interface ESDialogController : NSWindowController
 @property (nonatomic, copy) NSString *msg;
 @property (nonatomic, copy) NSString *className;
+@property (nonatomic, assign) BOOL objIsKindOfArray;
 @property (nonatomic, copy) void (^useDefaultBlock)(NSString *className);
-@property (nonatomic, copy) void (^enterBlock)(NSString *className);
+@property (nonatomic, copy) void (^enterBlock)(NSString *className,BOOL isImplementMethodOfMJExtension);
 
 
--(void)setDataWithMsg:(NSString *)msg defaultClassName:(NSString *)className useDefault:(void(^)(NSString *className))useDefaultBlock enter:(void(^)(NSString *className))enterBlock;
+-(void)setDataWithMsg:(NSString *)msg defaultClassName:(NSString *)className enter:(void(^)(NSString *className,BOOL isImplementMethodOfMJExtension))enterBlock;
 
 @end

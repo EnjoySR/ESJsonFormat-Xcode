@@ -28,4 +28,6 @@
 
 #define ESFormatResultNotification @"ESFormatResultNotification"
 
+#define ESRootClassName @"#ESRootClassName#"
+
 #endif

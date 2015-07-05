@@ -10,6 +10,7 @@
 #import "ESClassInfo.h"
 #import "ESFormatInfo.h"
 #import "ESClassInfo.h"
+#import "ESPair.h"
 
 @interface ESJsonFormatManager()
 @property (nonatomic, strong) NSMutableArray *classArray;
@@ -38,6 +39,7 @@
 
 #pragma mark - Format Objc
 - (ESFormatInfo *)parseObjcWithDic:(NSDictionary *)dic{
+    NSLog(@"%@",self.implementMethodOfMJExtensionClassNamesDic);
     NSMutableString *resultStr = [NSMutableString string];
     [dic enumerateKeysAndObjectsUsingBlock:^(id key, NSObject *obj, BOOL *stop) {
         [resultStr appendFormat:@"\n%@\n",[self formatObjcWithKey:key value:obj]];
@@ -48,6 +50,14 @@
         }
     }
     self.formatInfo.pasteboardContent = resultStr;
+    
+    //Set implement method content for root class.
+    NSArray *implementMethodOfMJExtensionClassNames = self.implementMethodOfMJExtensionClassNamesDic[ESRootClassName];
+    if (implementMethodOfMJExtensionClassNames.count>0) {
+        self.formatInfo.rootClassImplementMethodOfMJExtensionContent =
+        [NSString stringWithFormat:@"%@\n",[self methodContentOfObjectClassInArrayWithArray:implementMethodOfMJExtensionClassNames]];
+    }
+
     return self.formatInfo;
 }
 
@@ -118,9 +128,16 @@
         NSMutableString *writeToMString = [NSMutableString string];
         if(self.formatInfo.writeToMContent)
             [writeToMString appendString:self.formatInfo.writeToMContent];
-        [writeToMString appendFormat:@"\n@implementation %@\n\n@end\n",classInfo.className];
-        self.formatInfo.writeToMContent = writeToMString;
         
+        NSArray *implementMethodOfMJExtensionClassNames = self.implementMethodOfMJExtensionClassNamesDic[classInfo.className];
+        if (implementMethodOfMJExtensionClassNames.count>0) {
+            NSString *methodContent = [self methodContentOfObjectClassInArrayWithArray:implementMethodOfMJExtensionClassNames];
+            [writeToMString appendFormat:@"\n@implementation %@\n%@\n@end\n",classInfo.className,methodContent];
+        }else{
+            [writeToMString appendFormat:@"\n@implementation %@\n\n@end\n",classInfo.className];
+        }
+        
+        self.formatInfo.writeToMContent = writeToMString;
         if (classFormatInfo.writeToMContent.length>0) {
             self.formatInfo.writeToMContent = [NSString stringWithFormat:@"%@%@",self.formatInfo.writeToMContent,classFormatInfo.writeToMContent];
         }
@@ -128,6 +145,21 @@
     [self.formatInfo.classInfoArray addObjectsFromArray:classFormatInfo.classInfoArray];
     [self.formatInfo.classInfoArray addObject:classInfo];
     return result;
+}
+
+-(NSString *)methodContentOfObjectClassInArrayWithArray:(NSArray *)classNames{
+    NSMutableString *dicContentStr = [NSMutableString string];
+    NSInteger count = classNames.count;
+    for (int i=0; i<count; i++) {
+        ESPair *pair = classNames[i];
+        [dicContentStr appendFormat:@"@\"%@\":[%@ class]",pair.first,pair.second];
+        if (i!=count-1) {//Itn't last one.
+            [dicContentStr appendFormat:@", "];
+        }
+    }
+    //append method content (objectClassInArray)
+    NSString *methodStr = [NSString stringWithFormat:@"\n-(NSDictionary *)objectClassInArray{\n    return @{%@};\n}\n",dicContentStr];
+    return methodStr;
 }
 
 
