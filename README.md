@@ -36,6 +36,11 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 修复json的value的值为Null的时候多出来的空行
 * 修复BOOL类型值格式化失效问题
 
+> -0.3
+
+* 支持生成MJExtension框架中objectClassInArray方法
+* 修复数组嵌套多级，里面子数组不能格式化的Bug
+
 ####Alcatraz
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
 
@@ -96,4 +101,4 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 如果你半夜睡不着觉也可以Issues我。
 
 
-Thanks：[GsonFormat](https://github.com/zzz40500/GsonFormat)、[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)
+Thanks：[GsonFormat](https://github.com/zzz40500/GsonFormat)、[VVDocumenter-Xcode](https://github.com/onevcat/VVDocumenter-Xcode)、[MJExtension](https://github.com/CoderMJLee/MJExtension)
