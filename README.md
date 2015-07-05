@@ -90,8 +90,6 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 ~~~
 
 ####计划实现：
-
-* 生成MJExtension中集合对应的Class的方法
 * 将嵌套模型生成文件
 
 ####其他：
