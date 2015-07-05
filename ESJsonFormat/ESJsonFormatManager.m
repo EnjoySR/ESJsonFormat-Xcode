@@ -158,7 +158,7 @@
         }
     }
     //append method content (objectClassInArray)
-    NSString *methodStr = [NSString stringWithFormat:@"\n-(NSDictionary *)objectClassInArray{\n    return @{%@};\n}\n",dicContentStr];
+    NSString *methodStr = [NSString stringWithFormat:@"\n+ (NSDictionary *)objectClassInArray{\n    return @{%@};\n}\n",dicContentStr];
     return methodStr;
 }
 

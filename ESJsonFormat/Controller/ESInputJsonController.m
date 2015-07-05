@@ -132,7 +132,7 @@
                     NSArray *array = obj;
                     if (array.firstObject) {
                         ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:[array firstObject]];
-                        [dic setObject:[self dealNameWithDictionary:classInfo] forKey:key];
+                        [self dealNameWithDictionary:classInfo];
                     }
                 }
             }
