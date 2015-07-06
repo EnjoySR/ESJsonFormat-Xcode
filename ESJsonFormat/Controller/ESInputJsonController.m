@@ -101,11 +101,16 @@
     if ([datas isKindOfClass:[ESClassInfo class]]) {
         ESClassInfo *classInfo = datas;
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:classInfo.classDic];
-        [dic enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+        for (NSString *key in dic) {
+            id obj = dic[key];
             if ([obj isKindOfClass:[NSArray class]] || [obj isKindOfClass:[NSDictionary class]]) {
                 ESDialogController *dialog = [[ESDialogController alloc] initWithWindowNibName:@"ESDialogController"];
                 NSString *msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
                 if ([obj isKindOfClass:[NSArray class]]) {
+                    //May be 'NSString'，will crash
+                    if ([[obj firstObject] isKindOfClass:[NSString class]]) {
+                        continue;
+                    }
                     dialog.objIsKindOfArray = YES;
                     msg = [NSString stringWithFormat:@"The '%@' child items class name is:",key];
                 }
@@ -131,12 +136,16 @@
                 }else if([obj isKindOfClass:[NSArray class]]){
                     NSArray *array = obj;
                     if (array.firstObject) {
-                        ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:[array firstObject]];
-                        [self dealNameWithDictionary:classInfo];
+                        NSObject *obj = [array firstObject];
+                        //May be 'NSString'，will crash
+                        if ([obj isKindOfClass:[NSDictionary class]]) {
+                            ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:(NSDictionary *)obj];
+                            [self dealNameWithDictionary:classInfo];
+                        }
                     }
                 }
             }
-        }];
+        }
         return dic;
     }else if([datas isKindOfClass:[NSArray class]]){
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];

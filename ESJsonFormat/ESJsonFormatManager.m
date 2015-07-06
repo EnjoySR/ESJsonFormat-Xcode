@@ -91,10 +91,13 @@
     }else if([value isKindOfClass:[NSArray class]]){
         NSArray *array = (NSArray *)value;
         
-        ESClassInfo *info = [[ESClassInfo alloc] init];
-        info.className = self.replaceClassNames[key];
-        info.classDic = [array firstObject];
-        [self.classArray addObject:info];
+        //May be 'NSString'，will crash
+        if ([[array firstObject] isKindOfClass:[NSDictionary class]]) {
+            ESClassInfo *info = [[ESClassInfo alloc] init];
+            info.className = self.replaceClassNames[key];
+            info.classDic = [array firstObject];
+            [self.classArray addObject:info];
+        }
         
         qualifierStr = @"strong";
         typeStr = @"NSArray";
@@ -198,13 +201,15 @@
         return [NSString stringWithFormat:@"    var %@: %@ = 0",key,typeStr];
     }else if([value isKindOfClass:[NSArray class]]){
         NSArray *array = (NSArray *)value;
-        
-        ESClassInfo *info = [[ESClassInfo alloc] init];
-        info.className = self.replaceClassNames[key];
-        info.classDic = [array firstObject];
-        [self.classArray addObject:info];
-        
-        return [NSString stringWithFormat:@"    var %@: [%@]?",key,self.replaceClassNames[key]];
+        //May be 'NSString'，will crash
+        if ([[array firstObject] isKindOfClass:[NSDictionary class]]) {
+            ESClassInfo *info = [[ESClassInfo alloc] init];
+            info.className = self.replaceClassNames[key];
+            info.classDic = [array firstObject];
+            [self.classArray addObject:info];
+        }
+        NSString *type = self.replaceClassNames[key];
+        return [NSString stringWithFormat:@"    var %@: [%@]?",key,type==nil?@"String":type];
     }else if ([value isKindOfClass:[NSDictionary class]]){
         typeStr = self.replaceClassNames[key];
         if (!typeStr) {
