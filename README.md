@@ -5,7 +5,7 @@
 > * **Json中的key对应的value为Null的话会格式化成NSString类型**
 > * **格式化之前光标放在你需要添加属性的地方**
 > * **RootClass需要自己手动创建，插件只负责RootClass里面的属性生成**
-> * **生成的MJExtension 2.0框架中objectClassInArray方法**
+> * **生成的MJExtension 2.0框架中objectClassInArray方法(类方法)**
 
 
 ####怎么安装：
