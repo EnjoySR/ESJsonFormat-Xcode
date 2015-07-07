@@ -191,13 +191,13 @@
     NSLog(@"jsonString=%@",jsonString);
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+    id dicOrArray = [NSJSONSerialization JSONObjectWithData:jsonData
                                                         options:NSJSONReadingMutableContainers
                                                           error:&err];
     if (err) {
         return err;
     }else{
-        return dic;
+        return dicOrArray;
     }
     
 }

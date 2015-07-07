@@ -43,7 +43,8 @@
                                                      name:NSApplicationDidFinishLaunchingNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:ESFormatResultNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:nil object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:NSTextViewDidChangeSelectionNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEEditorDocumentDidChangeNotification" object:nil];
         
     }
     instance = self;
@@ -60,13 +61,16 @@
         }
     }else if ([notify.name isEqualToString:@"IDEEditorDocumentDidChangeNotification"]){
         //Track the current open paths
-        NSObject *object = notify.userInfo[@"IDEEditorDocumentChangeLocationsKey"];
-        NSString *path = [[[object valueForKey:@"documentURL"] firstObject] absoluteString];
-        self.currentFilePath = path;
-        if ([self.currentFilePath hasSuffix:@"swift"]) {
-            self.swift = YES;
-        }else{
-            self.swift = NO;
+        NSObject *array = notify.userInfo[@"IDEEditorDocumentChangeLocationsKey"];
+        NSURL *url = [[array valueForKey:@"documentURL"] firstObject];
+        if (![url isKindOfClass:[NSNull class]]) {
+            NSString *path = [url absoluteString];
+            self.currentFilePath = path;
+            if ([self.currentFilePath hasSuffix:@"swift"]) {
+                self.swift = YES;
+            }else{
+                self.swift = NO;
+            }
         }
     }
 }
