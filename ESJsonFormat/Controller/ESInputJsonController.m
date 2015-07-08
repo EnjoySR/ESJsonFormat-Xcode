@@ -108,7 +108,7 @@
                 NSString *msg = [NSString stringWithFormat:@"The '%@' correspond class name is:",key];
                 if ([obj isKindOfClass:[NSArray class]]) {
                     //May be 'NSString'，will crash
-                    if ([[obj firstObject] isKindOfClass:[NSString class]]) {
+                    if (![[obj firstObject] isKindOfClass:[NSDictionary class]]) {
                         continue;
                     }
                     dialog.objIsKindOfArray = YES;
@@ -132,7 +132,7 @@
                 [NSApp runModalForWindow:[dialog window]];
                 if ([obj isKindOfClass:[NSDictionary class]]) {
                     ESClassInfo *classInfo = [[ESClassInfo alloc] initWithClassName:childClassName classDic:obj];
-                    [dic setObject:[self dealNameWithDictionary:classInfo] forKey:key];
+                    [self dealNameWithDictionary:classInfo];
                 }else if([obj isKindOfClass:[NSArray class]]){
                     NSArray *array = obj;
                     if (array.firstObject) {
