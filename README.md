@@ -1,5 +1,5 @@
 ### ESJsonFormat-Xcode
-将JSON格式化输出为模型的属性
+将JSON格式化输出为模型的属性　　　　个人活动范围>[Weibo-EnjoySR](http://weibo.com/EnjoySR)
 
 **写在之前的注意**
 > * **JSON中的key对应的value为Null的话会格式化成NSString类型**
