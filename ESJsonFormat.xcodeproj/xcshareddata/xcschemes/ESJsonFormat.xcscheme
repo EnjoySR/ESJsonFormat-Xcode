@@ -55,10 +55,6 @@
       debugXPCServices = "NO"
       allowLocationSimulation = "NO"
       viewDebuggingEnabled = "No">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/Applications/Xcode-beta.app">
-      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
