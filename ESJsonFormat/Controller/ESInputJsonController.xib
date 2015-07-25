@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
@@ -7,7 +7,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ESInputJsonController">
             <connections>
                 <outlet property="cancelButton" destination="Fkf-zu-ER8" id="7Q3-wI-3FI"/>
-                <outlet property="createNewFileCheckBtn" destination="Ceb-am-lPU" id="Jtm-ve-tRx"/>
                 <outlet property="enterButton" destination="dcK-H9-JYv" id="Yns-8u-ChD"/>
                 <outlet property="inputTextView" destination="r1a-GN-ZV2" id="UWG-s3-Lwx"/>
                 <outlet property="scrollView" destination="1MB-V1-NpX" id="37X-ug-tuB"/>
@@ -18,7 +17,6 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Input your json" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="768" y="530" width="400" height="400"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="se5-gp-TjO">
@@ -54,13 +52,6 @@ Gw
                             <action selector="cancelButtonClick:" target="-2" id="MC5-TF-RNw"/>
                         </connections>
                     </button>
-                    <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ceb-am-lPU">
-                        <rect key="frame" x="111" y="4" width="120" height="18"/>
-                        <buttonCell key="cell" type="check" title="Create New File" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="aOD-s5-lRn">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MB-V1-NpX">
                         <rect key="frame" x="0.0" y="26" width="400" height="374"/>
                         <clipView key="contentView" id="YjX-XF-Yb3">
@@ -93,9 +84,7 @@ Gw
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Fkf-zu-ER8" secondAttribute="bottom" constant="3" id="5tE-Fx-bFm"/>
                     <constraint firstItem="1MB-V1-NpX" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="7T4-mr-GVz"/>
-                    <constraint firstItem="Fkf-zu-ER8" firstAttribute="centerY" secondItem="Ceb-am-lPU" secondAttribute="centerY" constant="-0.5" id="9F6-3T-uw5"/>
                     <constraint firstAttribute="trailing" secondItem="dcK-H9-JYv" secondAttribute="trailing" constant="9" id="K9o-yd-omk"/>
-                    <constraint firstItem="Fkf-zu-ER8" firstAttribute="leading" secondItem="Ceb-am-lPU" secondAttribute="trailing" constant="10" id="Y6g-I0-Dt3"/>
                     <constraint firstAttribute="bottom" secondItem="dcK-H9-JYv" secondAttribute="bottom" constant="3" id="g31-LD-yvQ"/>
                     <constraint firstItem="Fkf-zu-ER8" firstAttribute="top" secondItem="1MB-V1-NpX" secondAttribute="bottom" constant="2" id="gRD-oI-gbE"/>
                     <constraint firstAttribute="trailing" secondItem="1MB-V1-NpX" secondAttribute="trailing" id="pw8-oV-bSw"/>

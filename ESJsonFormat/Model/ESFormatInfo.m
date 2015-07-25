@@ -10,26 +10,20 @@
 #import "ESClassInfo.h"
 
 @implementation ESFormatInfo
--(instancetype)initWithCreateToFile:(BOOL)createToFile{
-    self = [super init];
-    if (self) {
-        _createNewFile = createToFile;
-    }
-    return self;
-}
 
--(NSMutableArray *)classInfoArray{
-    if (!_classInfoArray) {
-        _classInfoArray = [NSMutableArray array];
+
+-(NSMutableArray *)classInfos{
+    if (!_classInfos) {
+        _classInfos = [NSMutableArray array];
     }
-    return _classInfoArray;
+    return _classInfos;
 }
 
 -(NSString *)atClassContent{
-    if (!self.classInfoArray.count) return nil;
-    NSMutableString *resultStr = [NSMutableString stringWithFormat:@"\n@class %@",[[self.classInfoArray firstObject] className]];
-    for (int i=0; i<self.classInfoArray.count-1; i++) {
-        ESClassInfo *info = self.classInfoArray[i+1];
+    if (!self.classInfos.count) return nil;
+    NSMutableString *resultStr = [NSMutableString stringWithFormat:@"\n@class %@",[[self.classInfos firstObject] className]];
+    for (int i=0; i<self.classInfos.count-1; i++) {
+        ESClassInfo *info = self.classInfos[i+1];
         [resultStr appendFormat:@",%@",info.className];
     }
     [resultStr appendString:@";"];

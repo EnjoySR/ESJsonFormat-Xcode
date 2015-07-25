@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ESSettingController">
+            <connections>
+                <outlet property="btnGeneric" destination="FIE-dA-b1R" id="Ixf-zt-Ngh"/>
+                <outlet property="btnImpMJExtesion" destination="dXc-h6-O8R" id="AND-ou-tuH"/>
+                <outlet property="btnOutputToFile" destination="xTo-NY-de8" id="bJG-th-UpQ"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="ESJsonFormat Setting" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <rect key="contentRect" x="760" y="506" width="475" height="112"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="475" height="112"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="FIE-dA-b1R">
+                        <rect key="frame" x="48" y="47" width="229" height="18"/>
+                        <buttonCell key="cell" type="check" title="Use generic for Xcode 7 and later" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gb8-hX-fES">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="btnUseGenericClick:" target="-2" id="uFu-vm-66K"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="xTo-NY-de8">
+                        <rect key="frame" x="48" y="18" width="134" height="18"/>
+                        <buttonCell key="cell" type="check" title="The output to files" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Qcn-Rz-YgD">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="btnOutputToFilesClick:" target="-2" id="RVe-qD-gti"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="dXc-h6-O8R">
+                        <rect key="frame" x="48" y="76" width="287" height="18"/>
+                        <buttonCell key="cell" type="check" title="Implement method 'objectClassInArray' for" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5wx-mN-wAc">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="btnImpMtdForMJClick:" target="-2" id="Qtc-aS-4sW"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eB9-TM-LrY">
+                        <rect key="frame" x="336" y="77" width="84" height="17"/>
+                        <gestureRecognizers>
+                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="L4p-DW-5eC">
+                                <connections>
+                                    <action selector="tapGes:" target="-2" id="6cn-Xh-A9B"/>
+                                </connections>
+                            </clickGestureRecognizer>
+                        </gestureRecognizers>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MJExtension" id="uDG-57-0sK">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="FIE-dA-b1R" secondAttribute="leading" id="NAD-BC-D71"/>
+                    <constraint firstItem="xTo-NY-de8" firstAttribute="top" secondItem="FIE-dA-b1R" secondAttribute="bottom" constant="15" id="NlS-iG-40P"/>
+                    <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="xTo-NY-de8" secondAttribute="leading" id="OfI-Gs-mcC"/>
+                    <constraint firstItem="FIE-dA-b1R" firstAttribute="top" secondItem="dXc-h6-O8R" secondAttribute="bottom" constant="15" id="RiL-YB-Sbv"/>
+                    <constraint firstItem="eB9-TM-LrY" firstAttribute="centerY" secondItem="dXc-h6-O8R" secondAttribute="centerY" constant="-0.5" id="RwN-9U-MGb"/>
+                    <constraint firstItem="eB9-TM-LrY" firstAttribute="leading" secondItem="dXc-h6-O8R" secondAttribute="trailing" constant="5" id="a1g-FG-NTH"/>
+                    <constraint firstItem="dXc-h6-O8R" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="e6Y-s3-rd9"/>
+                    <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="50" id="wRH-NW-Z8r"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="-122.5" y="216"/>
+        </window>
+    </objects>
+</document>

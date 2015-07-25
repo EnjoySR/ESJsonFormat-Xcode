@@ -10,10 +10,14 @@
 #import "ESJsonFormatManager.h"
 #import "ESFormatInfo.h"
 #import "ESInputJsonController.h"
+#import "ESSettingController.h"
 #import "ESPbxprojInfo.h"
+#import "ESJsonFormatSetting.h"
+#import "ESClassInfo.h"
 
 @interface ESJsonFormat()<ESInputJsonControllerDelegate>
 @property (nonatomic, strong) ESInputJsonController *inputCtrl;
+@property (nonatomic, strong) ESSettingController *settingCtrl;
 @property (nonatomic, strong) id eventMonitor;
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, copy) NSString *currentFilePath;
@@ -45,7 +49,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outputResult:) name:ESFormatResultNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:NSTextViewDidChangeSelectionNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEEditorDocumentDidChangeNotification" object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"PBXProjectDidOpenNotification" object:nil];
     }
     instance = self;
     return self;
@@ -72,39 +76,72 @@
                 self.swift = NO;
             }
         }
+    }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
+        self.currentProjectPath = [notify.object valueForKey:@"path"];
+        [[ESPbxprojInfo shareInstance] setParamsWithPath:[self.currentProjectPath stringByAppendingPathComponent:@"project.pbxproj"]];
     }
 }
 
 -(void)outputResult:(NSNotification*)noti{
-    if (!self.currentTextView) return;
-    ESFormatInfo *info =  noti.object;
-    
-    if (!self.isSwift) {
-        if (self.currentFilePath.length>0 && info.writeToMContent.length>0) {
-            //write to '.m'
+    ESClassInfo *classInfo = noti.object;
+    if ([ESJsonFormatSetting defaultSetting].outputToFiles) {
+        //选择保存路径
+        NSOpenPanel *panel = [NSOpenPanel openPanel];
+        [panel setTitle:@"ESJsonFormat"];
+        [panel setCanChooseDirectories:YES];
+        [panel setCanCreateDirectories:YES];
+        [panel setCanChooseFiles:NO];
+        
+        if ([panel runModal] == NSModalResponseOK) {
+            NSString *folderPath = [[[panel URLs] objectAtIndex:0] relativePath];
+            [classInfo createFileWithFolderPath:folderPath];
+            [[NSWorkspace sharedWorkspace] openFile:folderPath];
+        }
+        
+    }else{
+        if (!self.currentTextView) return;
+        if (!self.isSwift) {
+            //先添加主类的属性
+            [self.currentTextView insertText:classInfo.propertyContent];
+            
+            //再添加把其他类的的字符串拼接到最后面
+            [self.currentTextView insertText:classInfo.classInsertTextViewContentForH replacementRange:NSMakeRange(self.currentTextView.string.length, 0)];
+            
+            //@class
+            NSString *atClassContent = classInfo.atClassContent;
+            if (atClassContent.length>0) {
+                NSRange atInsertRange = [self.currentTextView.string rangeOfString:@"\n@interface"];
+                if (atInsertRange.location != NSNotFound) {
+                    [self.currentTextView insertText:[NSString stringWithFormat:@"\n%@",atClassContent] replacementRange:NSMakeRange(atInsertRange.location, 0)];
+                }
+            }
+            
+            //再添加.m文件的内容
             NSString *urlStr = [NSString stringWithFormat:@"%@m",[self.currentFilePath substringWithRange:NSMakeRange(0, self.currentFilePath.length-1)]] ;
             NSURL *writeUrl = [NSURL URLWithString:urlStr];
             //The original content
             NSString *originalContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
             
-            if (info.rootClassImplementMethodOfMJExtensionContent.length>0) {
-                NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
-                originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(lastEndRange.location, 0) withString:info.rootClassImplementMethodOfMJExtensionContent];
+            //输出RootClass的impOjbClassInArray方法
+            if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
+                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo];
+                if (methodStr.length) {
+                    NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
+                    if (lastEndRange.location != NSNotFound) {
+                        originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(lastEndRange.location, 0) withString:methodStr];
+                    }
+                }
             }
+            originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(originalContent.length, 0) withString:classInfo.classInsertTextViewContentForM];
+            [originalContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
             
-            //Append new content
-            NSMutableString *newContent = [NSMutableString stringWithFormat:@"%@\n%@",originalContent,info.writeToMContent];
-            [newContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        }else{
+            //Swift
+            [self.currentTextView insertText:classInfo.propertyContent];
+            
+            //再添加把其他类的的字符串拼接到最后面
+            [self.currentTextView insertText:classInfo.classInsertTextViewContentForH replacementRange:NSMakeRange(self.currentTextView.string.length, 0)];
         }
-        [self.currentTextView insertText:info.pasteboardContent];
-        if (info.atClassContent.length>0) {
-            //add atclass
-            NSRange atInsertRange = [self.currentTextView.string rangeOfString:@"\n@interface"];
-            [self.currentTextView insertText:info.atClassContent replacementRange:NSMakeRange(atInsertRange.location, 0)];
-        }
-    }else{
-        //swift
-        [self.currentTextView insertText:info.pasteboardContent];
     }
 }
 
@@ -113,15 +150,29 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
     NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Window"];
     if (menuItem) {
-        [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-        NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"ESJsonFormat" action:@selector(doMenuAction:) keyEquivalent:@"J"];
-        [actionMenuItem setKeyEquivalentModifierMask:NSAlphaShiftKeyMask | NSControlKeyMask];
-        [actionMenuItem setTarget:self];
-        [[menuItem submenu] addItem:actionMenuItem];
+        
+        NSMenu *menu = [[NSMenu alloc] init];
+        
+        //Input JSON window
+        NSMenuItem *inputJsonWindow = [[NSMenuItem alloc] initWithTitle:@"Input JSON window" action:@selector(showInputJsonWindow:) keyEquivalent:@"J"];
+        [inputJsonWindow setKeyEquivalentModifierMask:NSAlphaShiftKeyMask | NSControlKeyMask];
+        inputJsonWindow.target = self;
+        [menu addItem:inputJsonWindow];
+        
+        //Setting
+        NSMenuItem *settingWindow = [[NSMenuItem alloc] initWithTitle:@"Setting" action:@selector(showSettingWindow:) keyEquivalent:@""];
+        settingWindow.target = self;
+        [menu addItem:settingWindow];
+        
+        NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:@"ESJsonFormat" action:nil keyEquivalent:@""];
+        item.submenu = menu;
+    
+        [[menuItem submenu] addItem:item];
     }
 }
 
-- (void)doMenuAction:(NSMenuItem *)item{
+- (void)showInputJsonWindow:(NSMenuItem *)item{
+
     if (!(self.currentTextView && self.currentFilePath)) {
         NSError *error = [NSError errorWithDomain:@"Current state is not edit!" code:0 userInfo:nil];
         NSAlert *alert = [NSAlert alertWithError:error];
@@ -132,6 +183,11 @@
     self.inputCtrl = [[ESInputJsonController alloc] initWithWindowNibName:@"ESInputJsonController"];
     self.inputCtrl.delegate = self;
     [self.inputCtrl showWindow:self.inputCtrl];
+}
+
+- (void)showSettingWindow:(NSMenuItem *)item{
+    self.settingCtrl = [[ESSettingController alloc] initWithWindowNibName:@"ESSettingController"];
+    [self.settingCtrl showWindow:self.settingCtrl];
 }
 
 -(void)windowWillClose{

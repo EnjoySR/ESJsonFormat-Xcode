@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface ESFormatInfo : NSObject
-@property (nonatomic, assign, readonly, getter=isCreateNewFile) BOOL createNewFile;
+
 @property (nonatomic, copy) NSString *pasteboardContent;
 @property (nonatomic, copy) NSString *writeToMContent;
 @property (nonatomic, copy) NSString *rootClassImplementMethodOfMJExtensionContent;
-@property (nonatomic, strong) NSMutableArray *classInfoArray;
+@property (nonatomic, strong) NSMutableArray *classInfos;
+
+/**
+ *  @class 内容，用于在不创建文件的模式下使用。
+ */
 @property (nonatomic, copy) NSString *atClassContent;
 
--(instancetype)initWithCreateToFile:(BOOL)createToFile;
 @end

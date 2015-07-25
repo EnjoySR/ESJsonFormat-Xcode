@@ -1,0 +1,8 @@
+//
+//  __MODELNAME__
+//  __PRODUCTNAME__
+//
+//  Created by __NAME__ on __DATE__
+//  Copyright (c) __ORGANIZATIONNAME__. All rights reserved.
+//
+

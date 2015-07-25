@@ -18,7 +18,6 @@
 
 @property (weak) IBOutlet NSLayoutConstraint *fieldBottomConstraint;
 
-
 @property (weak) IBOutlet NSLayoutConstraint *checkButtonBottomConstraint;
 @end
 
@@ -32,15 +31,14 @@
     self.classNameField.stringValue = self.className;
     [self.classNameField becomeFirstResponder];
     
-    if (!self.objIsKindOfArray) {
+    if (YES) {
         [self hideImplementCheckButton];
     }
 }
 
--(void)setDataWithMsg:(NSString *)msg defaultClassName:(NSString *)className enter:(void(^)(NSString *className,BOOL isImplementMethodOfMJExtension))enterBlock{
+-(void)setDataWithMsg:(NSString *)msg defaultClassName:(NSString *)className enter:(void(^)(NSString *className))enterBlock{
     self.msg = msg;
     self.className = className;
-//    self.useDefaultBlock = useDefaultBlock;
     self.enterBlock = enterBlock;
 }
 
@@ -53,16 +51,10 @@
     [rootView updateConstraints];
 }
 
-- (IBAction)useDefaultBtnClick:(NSButton *)sender {
-    if (self.useDefaultBlock) {
-        self.useDefaultBlock(self.className);
-    }
-    [self close];
-}
 
-- (IBAction)enterBtnClick:(NSButton *)sender {
+- (void)enterBtnClick:(NSButton *)sender {
     if (self.enterBlock) {
-        self.enterBlock(self.classNameField.stringValue,self.implementCheckButton.state);
+        self.enterBlock(self.classNameField.stringValue);
     }
     [self close];
 }

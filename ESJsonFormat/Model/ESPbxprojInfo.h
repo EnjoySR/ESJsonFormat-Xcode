@@ -11,6 +11,7 @@
 @interface ESPbxprojInfo : NSObject
 @property (nonatomic, copy, readonly) NSString *classPrefix;
 @property (nonatomic, copy, readonly) NSString *organizationName;
+@property (nonatomic, copy, readonly) NSString *productName;
 
 +(instancetype)shareInstance;
 -(void)setParamsWithPath:(NSString *)path;

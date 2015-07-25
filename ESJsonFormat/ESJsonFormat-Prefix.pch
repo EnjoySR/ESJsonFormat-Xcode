@@ -12,11 +12,12 @@
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
+#import "ESUtils.h"
 #import "NSString+ESExtension.h"
 #endif
 
 
-#if 0
+#if 1
 #define __DEBUG__
 #endif
 
@@ -28,6 +29,12 @@
 
 #define ESFormatResultNotification @"ESFormatResultNotification"
 
-#define ESRootClassName @"#ESRootClassName#"
+#define ESRootClassName @"ESRootClass"
+
+#define ESItemClassName @"ESItemClass"
+
+#define ESArrayKeyName @"esArray"
+
+#define ESJsonFormatPluginPath [[NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"Developer/Shared/Xcode/Plug-ins/ESJsonFormat.xcplugin"]
 
 #endif

@@ -26,6 +26,7 @@ static ESPbxprojInfo *instance;
     NSString *pbxprojStr = [[NSString alloc] initWithData:pbxprojData encoding:NSUTF8StringEncoding];
     _classPrefix = [self matchStringWithKeyWord:@"CLASSPREFIX" matchInString:pbxprojStr];
     _organizationName = [self matchStringWithKeyWord:@"ORGANIZATIONNAME" matchInString:pbxprojStr];
+    _productName = [self matchStringWithKeyWord:@"productName" matchInString:pbxprojStr];
 }
 
 -(NSString *)matchStringWithKeyWord:(NSString *)keyWord matchInString:(NSString *)matchString{
