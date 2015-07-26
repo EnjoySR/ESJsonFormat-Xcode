@@ -32,6 +32,7 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 1)是否生成的 MJExtension 框架中objectClassInArray方法(类方法，默认勾选)
 * 2)是否格式化输出泛型(Xcode 7 及之后才有效，默认勾选)
 * 3)是否输出到文件(如果勾选，不用自己新建 RootClass。默认`不勾选`)
+* 4)key为id关键字的话是否大写(默认`不勾选`)
 * 注：输出到文件的内容还需要添加什么的可以联系我，人个认为不用像 JSON Accelerator 一样生成字典转模型的方法以及@synthesize修饰符，建议使用-> [MJExtension](https://github.com/CoderMJLee/MJExtension)，保型模型清爽干净。
 
 
