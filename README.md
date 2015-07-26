@@ -4,8 +4,8 @@
 **写在之前的注意**
 > * **JSON中的key对应的value为Null的话会格式化成NSString类型**
 > * **格式化之前光标放在你需要添加属性的地方**
-> * **RootClass需要自己手动创建，插件只负责RootClass里面的属性生成**
-> * **生成的MJExtension 2.0框架中objectClassInArray方法(类方法)**
+> * **如果不输出到文件，RootClass需要自己手动创建，插件只负责RootClass里面的属性生成**
+> * **生成的 MJExtension 框架中objectClassInArray方法(类方法)**
 
 
 ####怎么安装：
@@ -19,11 +19,21 @@
 
 ####怎么使用：
 
-
-
 Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入JSON-Enter
 
 ![Screenshot](https://github.com/EnjoySR/ESJsonFormat-Xcode/blob/master/ScreenShot/ScreenShot1.png)
+
+关于设置：
+
+![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/Setting.png)
+
+打开方式：Xcode菜单-Window-ESJsonFormat-Setting
+
+* 1)是否生成的 MJExtension 框架中objectClassInArray方法(类方法，默认勾选)
+* 2)是否格式化输出泛型(Xcode 7 及之后才有效，默认勾选)
+* 3)是否输出到文件(如果勾选，不用自己新建 RootClass。默认`不勾选`)
+* 注：输出到文件的内容还需要添加什么的可以联系我，人个认为不用像 JSON Accelerator 一样生成字典转模型的方法以及@synthesize修饰符，建议使用-> [MJExtension](https://github.com/CoderMJLee/MJExtension)，保型模型清爽干净。
+
 
 ####功能说明：
 > -0.1
@@ -42,6 +52,11 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 
 * 支持生成MJExtension框架中objectClassInArray方法
 * 修复数组嵌套多级，里面子数组不能格式化的Bug
+
+> -0.4
+
+* 支持格式输出到文件
+* 支持格式输出泛型(Xcode 7及之后) 
 
 ####Alcatraz
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
@@ -90,9 +105,6 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
     ]
 }
 ~~~
-
-####计划实现：
-* 将嵌套模型生成文件
 
 ####其他：
 
