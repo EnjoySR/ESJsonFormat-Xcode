@@ -55,11 +55,12 @@
 }
 
 - (NSString *)atClassContent{
-    if (self.propertyClassDic.count == 0 && ![ESJsonFormatSetting defaultSetting].useGeneric) {
+    NSArray *atClassArray = self.atClassArray;
+    if (atClassArray.count==0) {
         return @"";
     }
     
-    NSMutableArray *array = [NSMutableArray arrayWithArray:self.atClassArray];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:atClassArray];
     
     NSMutableString *resultStr = [NSMutableString stringWithFormat:@"@class "];
     for (ESClassInfo *classInfo in array) {
