@@ -15,5 +15,6 @@
 @property BOOL useGeneric;
 @property BOOL impOjbClassInArray;
 @property BOOL outputToFiles;
+@property BOOL uppercaseKeyWordForId;
 
 @end

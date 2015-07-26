@@ -43,6 +43,11 @@
     [[ESJsonFormatSetting defaultSetting] setOutputToFiles:sender.state];
 }
 
+- (IBAction)btnUpercaseKeyWordForIdClick:(NSButton *)sender {
+    [[ESJsonFormatSetting defaultSetting] setUppercaseKeyWordForId:sender.state];
+}
+
+
 - (IBAction)tapGes:(NSClickGestureRecognizer *)sender {
     NSURL* url = [[ NSURL alloc ] initWithString :@"http://t.cn/RLarUfg"];
     [[NSWorkspace sharedWorkspace] openURL:url];

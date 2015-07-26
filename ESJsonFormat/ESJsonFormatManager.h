@@ -7,15 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ESFormatInfo,ESClassInfo;
+@class ESClassInfo;
 @interface ESJsonFormatManager : NSObject
- 
-@property (nonatomic, strong) NSDictionary *replaceClassNames;
-@property (nonatomic, strong) NSDictionary *implementMethodOfMJExtensionClassNamesDic;
-
-- (ESFormatInfo *)parseObjcWithDic:(NSDictionary *)dic;
-- (ESFormatInfo *)parseSwiftWithDic:(NSDictionary *)dic;
-
 
 /**
  *  解析一个类里面属性字段的内容

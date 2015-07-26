@@ -16,14 +16,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="ESJsonFormat Setting" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
-            <rect key="contentRect" x="760" y="506" width="475" height="112"/>
+            <rect key="contentRect" x="760" y="506" width="475" height="141"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="475" height="112"/>
+                <rect key="frame" x="0.0" y="-1" width="475" height="141"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="FIE-dA-b1R">
-                        <rect key="frame" x="48" y="47" width="229" height="18"/>
+                        <rect key="frame" x="48" y="76" width="229" height="18"/>
                         <buttonCell key="cell" type="check" title="Use generic for Xcode 7 and later" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Gb8-hX-fES">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -33,7 +33,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="xTo-NY-de8">
-                        <rect key="frame" x="48" y="18" width="134" height="18"/>
+                        <rect key="frame" x="48" y="47" width="134" height="18"/>
                         <buttonCell key="cell" type="check" title="The output to files" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Qcn-Rz-YgD">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -43,7 +43,7 @@
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="dXc-h6-O8R">
-                        <rect key="frame" x="48" y="76" width="287" height="18"/>
+                        <rect key="frame" x="48" y="105" width="287" height="18"/>
                         <buttonCell key="cell" type="check" title="Implement method 'objectClassInArray' for" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5wx-mN-wAc">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -53,7 +53,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eB9-TM-LrY">
-                        <rect key="frame" x="336" y="77" width="84" height="17"/>
+                        <rect key="frame" x="336" y="106" width="84" height="17"/>
                         <gestureRecognizers>
                             <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="L4p-DW-5eC">
                                 <connections>
@@ -67,8 +67,19 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="Kcy-UJ-T8e">
+                        <rect key="frame" x="48" y="18" width="193" height="18"/>
+                        <buttonCell key="cell" type="check" title="Uppercase key word for 'id'" bezelStyle="regularSquare" imagePosition="left" inset="2" id="d8z-7B-IM8">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="btnUpercaseKeyWordForIdClick:" target="-2" id="xGN-0o-Xzr"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Kcy-UJ-T8e" firstAttribute="top" secondItem="xTo-NY-de8" secondAttribute="bottom" constant="15" id="5yF-5x-qxe"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="FIE-dA-b1R" secondAttribute="leading" id="NAD-BC-D71"/>
                     <constraint firstItem="xTo-NY-de8" firstAttribute="top" secondItem="FIE-dA-b1R" secondAttribute="bottom" constant="15" id="NlS-iG-40P"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="xTo-NY-de8" secondAttribute="leading" id="OfI-Gs-mcC"/>
@@ -76,13 +87,14 @@
                     <constraint firstItem="eB9-TM-LrY" firstAttribute="centerY" secondItem="dXc-h6-O8R" secondAttribute="centerY" constant="-0.5" id="RwN-9U-MGb"/>
                     <constraint firstItem="eB9-TM-LrY" firstAttribute="leading" secondItem="dXc-h6-O8R" secondAttribute="trailing" constant="5" id="a1g-FG-NTH"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="e6Y-s3-rd9"/>
+                    <constraint firstItem="Kcy-UJ-T8e" firstAttribute="leading" secondItem="dXc-h6-O8R" secondAttribute="leading" id="f3A-uZ-uzt"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="50" id="wRH-NW-Z8r"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="-122.5" y="216"/>
+            <point key="canvasLocation" x="-122.5" y="230.5"/>
         </window>
     </objects>
 </document>
