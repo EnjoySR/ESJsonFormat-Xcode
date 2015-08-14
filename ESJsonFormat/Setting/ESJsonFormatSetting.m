@@ -13,6 +13,7 @@ NSString *const kESJsonFormatGeneric = @"com.EnjoySR.ESJsonFormat.Generic";
 NSString *const kESJsonFormatOutputToFiles = @"com.EnjoySR.ESJsonFormat.OutputToFiles";
 NSString *const kESJsonFormatImpObjClassInArray = @"com.EnjoySR.ESJsonFormat.ImpObjClassInArray";
 NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.UppercaseKeyWordForId";
+NSString *const kESJsonFormatPropertyPosition = @"com.EnjoySR.ESJsonFormat.PropertyPosition";
 
 @implementation ESJsonFormatSetting
 
@@ -26,6 +27,7 @@ NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.
                                    kESJsonFormatOutputToFiles: @NO,
                                    kESJsonFormatImpObjClassInArray: @YES,
                                    kESJsonFormatUppercaseKeyWordForId: @NO};
+//                                   kESJsonFormatPropertyPosition: @NO,};
                   [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
     return defaultSetting;
@@ -65,6 +67,15 @@ NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.
 
 - (BOOL)uppercaseKeyWordForId{
     return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatUppercaseKeyWordForId];
+}
+
+- (void)setPropertyPosition:(BOOL)propertyPosition{
+    [[NSUserDefaults standardUserDefaults] setBool:propertyPosition forKey:kESJsonFormatPropertyPosition];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)propertyPosition{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatPropertyPosition];
 }
 
 @end

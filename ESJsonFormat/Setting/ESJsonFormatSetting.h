@@ -17,4 +17,6 @@
 @property BOOL outputToFiles;
 @property BOOL uppercaseKeyWordForId;
 
+@property BOOL propertyPosition;
+
 @end

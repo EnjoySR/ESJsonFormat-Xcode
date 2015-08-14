@@ -45,6 +45,9 @@
  *  @return
  */
 + (NSString *)formatObjcWithKey:(NSString *)key value:(NSObject *)value classInfo:(ESClassInfo *)classInfo{
+    
+    NSString *propertyFormat = [[ESJsonFormatSetting defaultSetting] propertyPosition] ? @"@property (%@, nonatomic) %@ *%@;" : @"@property (nonatomic, %@) %@ *%@;";
+    
     NSString *qualifierStr = @"copy";
     NSString *typeStr = @"NSString";
     //判断大小写
@@ -52,12 +55,12 @@
         key = [key uppercaseString];
     }
     if ([value isKindOfClass:[NSString class]]) {
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
+        return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
     }else if([value isKindOfClass:[@(YES) class]]){
         //the 'NSCFBoolean' is private subclass of 'NSNumber'
         qualifierStr = @"assign";
         typeStr = @"BOOL";
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ %@;",qualifierStr,typeStr,key];
+        return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
     }else if([value isKindOfClass:[NSNumber class]]){
         qualifierStr = @"assign";
         NSString *valueStr = [NSString stringWithFormat:@"%@",value];
@@ -71,7 +74,7 @@
                 typeStr = @"long long";
             }
         }
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ %@;",qualifierStr,typeStr,key];
+        return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
     }else if([value isKindOfClass:[NSArray class]]){
         NSArray *array = (NSArray *)value;
         
@@ -90,9 +93,9 @@
         qualifierStr = @"strong";
         typeStr = @"NSArray";
         if ([ESJsonFormatSetting defaultSetting].useGeneric && [ESUtils isXcode7AndLater]) {
-            return [NSString stringWithFormat:@"@property (nonatomic, %@) %@%@ *%@;",qualifierStr,typeStr,genericTypeStr,key];
+            return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,genericTypeStr,key];
         }
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
+        return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
     }else if ([value isKindOfClass:[NSDictionary class]]){
         qualifierStr = @"strong";
         ESClassInfo *childInfo = classInfo.propertyClassDic[key];
@@ -100,9 +103,9 @@
         if (!typeStr) {
             typeStr = [key capitalizedString];
         }
-        return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
+        return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
     }
-    return [NSString stringWithFormat:@"@property (nonatomic, %@) %@ *%@;",qualifierStr,typeStr,key];
+    return [NSString stringWithFormat:propertyFormat,qualifierStr,typeStr,key];
 }
 
 
