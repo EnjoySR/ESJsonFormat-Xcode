@@ -31,6 +31,8 @@
     if (![ESUtils isXcode7AndLater]) {
         self.btnGeneric.enabled = NO;
     }
+    
+    [self updateSettingState];
 }
 
 - (IBAction)btnImpMtdForMJClick:(NSButton *)sender {
@@ -51,6 +53,7 @@
 
 - (IBAction)btnPropertyPosition:(NSButton *)sender {
     [[ESJsonFormatSetting defaultSetting] setPropertyPosition:sender.state];
+    [self updateSettingState];
 }
 
 - (IBAction)tapGes:(NSClickGestureRecognizer *)sender {
@@ -58,6 +61,9 @@
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-
+- (void)updateSettingState
+{
+    self.btnPropertyPosition.title = self.btnPropertyPosition.state ?  @"@property (%@, nonatomic)" : @"@property (nonatomic, %@)";
+}
 
 @end
