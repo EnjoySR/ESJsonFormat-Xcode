@@ -55,6 +55,11 @@
       debugXPCServices = "NO"
       allowLocationSimulation = "NO"
       viewDebuggingEnabled = "No">
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.apple.dt.Xcode"
+         FilePath = "/Applications/Xcode.app">
+      </PathRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
