@@ -13,6 +13,7 @@
 @property (weak) IBOutlet NSButton *btnImpMJExtesion;
 @property (weak) IBOutlet NSButton *btnGeneric;
 @property (weak) IBOutlet NSButton *btnOutputToFile;
+@property (weak) IBOutlet NSButton *btnUpercaseForId;
 
 @end
 
@@ -25,7 +26,7 @@
     self.btnImpMJExtesion.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] impOjbClassInArray];
     self.btnGeneric.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] useGeneric];
     self.btnOutputToFile.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] outputToFiles];
-    
+    self.btnUpercaseForId.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] uppercaseKeyWordForId];
     if (![ESUtils isXcode7AndLater]) {
         self.btnGeneric.enabled = NO;
     }

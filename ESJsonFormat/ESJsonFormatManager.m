@@ -129,9 +129,9 @@
     }else if([value isKindOfClass:[NSNumber class]]){
         NSString *valueStr = [NSString stringWithFormat:@"%@",value];
         if ([valueStr rangeOfString:@"."].location!=NSNotFound){
-            typeStr = @"Double?";
+            typeStr = @"Double";
         }else{
-            typeStr = @"Int?";
+            typeStr = @"Int";
         }
         return [NSString stringWithFormat:@"    var %@: %@ = 0",key,typeStr];
     }else if([value isKindOfClass:[NSArray class]]){
