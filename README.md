@@ -79,7 +79,7 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
     "name": "王五",
     "gender": "man",
     "age": 15,
-    "height": "140cm",
+    "height": "140cm"
 }
 ~~~
 
