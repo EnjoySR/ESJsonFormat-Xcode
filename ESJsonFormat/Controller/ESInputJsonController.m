@@ -40,6 +40,9 @@
     [super windowDidLoad];
     self.inputTextView.delegate = self;
     self.window.delegate = self;
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewValueChanged:) name:NSTextViewDidChangeSelectionNotification object:nil];
 }
 
 -(void)windowWillClose:(NSNotification *)notification{
@@ -139,13 +142,25 @@
 }
 
 
+- (void)textViewValueChanged:(NSNotification *)noti
+{
+    if ([noti.object isKindOfClass:[NSTextView class]]) {
+        NSTextView *textView = noti.object;
+        textView.textColor = [NSColor redColor];
+    }
+}
+
+
+
 /**
  *  检查是否是一个有效的JSON
  */
 -(id)dictionaryWithJsonStr:(NSString *)jsonString{
     
     //如果是字典description的一部分, 直接截获
-    id dicOrArray = [self dictionaryWithString:jsonString];
+    id dicOrArray;
+    
+    dicOrArray = [self dictionaryWithString:jsonString];
     if (dicOrArray) {
         return dicOrArray;
     }
@@ -156,9 +171,9 @@
     NSLog(@"jsonString=%@",jsonString);
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
-    dicOrArray = [NSJSONSerialization JSONObjectWithData:jsonData
+    dicOrArray = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData
                                                  options:NSJSONReadingMutableContainers
-                                                   error:&err];
+                                                              error:&err] : nil;
     if (err) {
         return err;
     }else{
@@ -178,8 +193,8 @@
 {
     NSArray *arrayData = [string componentsSeparatedByString:@"="];
     
-    //最原始的方法检查.
-    if (!arrayData.firstObject || !arrayData.lastObject) {
+    
+    if ([arrayData.firstObject isEqualToString:@""] || [arrayData.lastObject isEqualToString:@""]) {
         return nil;
     }
     
@@ -242,15 +257,19 @@
         else if (![obj containsString:@"["] && ![obj containsString:@"]"] && ![obj containsString:@"{"] && ![obj containsString:@"}"]) {
             
             //重新组合 数组值  记录是否包含分号, 如果有, 先移除再补上
-            BOOL haveSemicolon = [[obj substringFromIndex:[obj length] - 1] containsString:@","];
-            if (haveSemicolon) {
-                obj = [obj stringByReplacingOccurrencesOfString:@"," withString:@""];
-            }
-            
-            obj = [self restructuringString:obj];
-            
-            if (haveSemicolon) {
-                obj = [obj stringByAppendingFormat:@"%@", @","];
+            if ([obj length] > 0) {  // 去掉长度为0的
+                
+                BOOL haveSemicolon = [[obj substringFromIndex:[obj length] - 1] containsString:@","];
+                if (haveSemicolon) {
+                    obj = [obj stringByReplacingOccurrencesOfString:@"," withString:@""];
+                }
+                
+                obj = [self restructuringString:obj];
+                
+                if (haveSemicolon) {
+                    obj = [obj stringByAppendingFormat:@"%@", @","];
+                }
+                
             }
             
         }
