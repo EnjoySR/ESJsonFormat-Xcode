@@ -388,14 +388,27 @@
 
 
 
-/*验证是不是全是数字*/
-- (BOOL)validateNum:(NSString *)candidate;
+/**验证整数*/
+- (BOOL)validateInteger:(NSString *)candidate;
 {
     if ([candidate isEqualToString:@""]) {
         return NO;
     }
     
-    NSString *regex = @"^[0-9]+(.[0-9]{1,2})?$";
+    NSString *regex = @"^-?[1-9]/d*$";
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [predicate evaluateWithObject:candidate];
+}
+
+/**验证浮点数*/
+- (BOOL)validateFloat:(NSString *)candidate;
+{
+    if ([candidate isEqualToString:@""]) {
+        return NO;
+    }
+    
+    NSString *regex = @"^(-?\\d+)(\\.\\d+)?$";
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:candidate];
@@ -404,13 +417,28 @@
 /**重组字符串, 在字符串前后添加双引号*/
 - (NSString *)restructuringString:(NSString *)string;
 {
-    if ([self validateNum:string]) {
+    if ([self validateInteger:string] || [self validateFloat:string]) {
         
-        //重新赋值, 避免前面是 一串0
-        if ([string rangeOfString:@"."].location != NSNotFound) {
-            string = [@([string floatValue]) stringValue];
-        }else {
-            string = [@([string integerValue]) stringValue];
+        //长度过长, 直接转为字符串
+        if ([string componentsSeparatedByString:@"."].firstObject.length > 8) {
+            
+            string = [NSString stringWithFormat:@"%@%@%@", @"\"", @"字符串的值", @"\""];
+            
+        }
+        else {
+            
+            //重新赋值, 避免前面是 一串0
+            if ([string rangeOfString:@"."].location != NSNotFound) {
+                string = [@([string floatValue]) stringValue];
+                
+                //如果转换后没有小数点
+                if ([string rangeOfString:@"."].location == NSNotFound) {
+                    string = [string stringByAppendingString:@".88"];
+                }
+                
+            }else {
+                string = [@([string integerValue]) stringValue];
+            }
         }
         
     }else {
@@ -421,3 +449,4 @@
 }
 
 @end
+
