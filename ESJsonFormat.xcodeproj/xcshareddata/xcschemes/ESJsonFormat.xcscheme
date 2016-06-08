@@ -61,7 +61,7 @@
       <PathRunnable
          runnableDebuggingMode = "0"
          BundleIdentifier = "com.apple.dt.Xcode"
-         FilePath = "/Applications/Xcode.app">
+         FilePath = "/Applications/Xcode7.1.1.app">
       </PathRunnable>
       <MacroExpansion>
          <BuildableReference
