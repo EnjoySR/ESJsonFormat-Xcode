@@ -32,6 +32,11 @@
 
 
 
+
+/**
+ *  调试请在Scheme中配置, Excutable Xcode
+ */
+
 #warning 不能用的, 在终端跑一下下面的命令, 把Xcode的UUID添加到插件中去  \
 \
 find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID`

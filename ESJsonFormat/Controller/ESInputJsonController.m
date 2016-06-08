@@ -145,8 +145,7 @@
 - (void)textViewValueChanged:(NSNotification *)noti
 {
     if ([noti.object isKindOfClass:[NSTextView class]]) {
-        NSTextView *textView = noti.object;
-        textView.textColor = [NSColor redColor];
+        self.inputTextView.textColor = [NSColor redColor];
     }
 }
 
