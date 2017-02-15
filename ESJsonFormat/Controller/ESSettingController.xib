@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ESSettingController">
@@ -21,7 +22,7 @@
             <rect key="contentRect" x="760" y="506" width="707" height="201"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="708" height="201"/>
+                <rect key="frame" x="0.0" y="0.0" width="707" height="201"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="FIE-dA-b1R">
@@ -57,9 +58,9 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eB9-TM-LrY">
                         <rect key="frame" x="330" y="131" width="82" height="17"/>
                         <gestureRecognizers>
-                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="L4p-DW-5eC">
+                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="L4p-DW-5eC" userLabel="mj">
                                 <connections>
-                                    <action selector="tapGes:" target="-2" id="6cn-Xh-A9B"/>
+                                    <action selector="tapMJGes:" target="-2" id="MXk-Nk-EaB"/>
                                 </connections>
                             </clickGestureRecognizer>
                         </gestureRecognizers>
@@ -89,12 +90,12 @@
                             <action selector="btnImpMtdForYYClick:" target="-2" id="SpS-ds-kbD"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7de-78-fa7">
-                        <rect key="frame" x="453" y="165" width="84" height="17"/>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7de-78-fa7">
+                        <rect key="frame" x="443" y="165" width="59" height="17"/>
                         <gestureRecognizers>
-                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="By0-jf-Rai">
+                            <clickGestureRecognizer delaysPrimaryMouseButtonEvents="YES" numberOfClicksRequired="1" id="By0-jf-Rai" userLabel="yy">
                                 <connections>
-                                    <action selector="tapGes:" target="-2" id="6pP-Dh-mYX"/>
+                                    <action selector="tapYYGes:" target="-2" id="HA8-pS-g7q"/>
                                 </connections>
                             </clickGestureRecognizer>
                         </gestureRecognizers>
@@ -114,8 +115,10 @@
                     <constraint firstItem="FIE-dA-b1R" firstAttribute="top" secondItem="dXc-h6-O8R" secondAttribute="bottom" constant="15" id="RiL-YB-Sbv"/>
                     <constraint firstItem="eB9-TM-LrY" firstAttribute="centerY" secondItem="dXc-h6-O8R" secondAttribute="centerY" constant="-0.5" id="RwN-9U-MGb"/>
                     <constraint firstItem="eB9-TM-LrY" firstAttribute="leading" secondItem="dXc-h6-O8R" secondAttribute="trailing" constant="5" id="a1g-FG-NTH"/>
+                    <constraint firstItem="7de-78-fa7" firstAttribute="centerY" secondItem="Nak-CV-Z7L" secondAttribute="centerY" id="at0-Vw-PtU"/>
                     <constraint firstItem="Kcy-UJ-T8e" firstAttribute="leading" secondItem="dXc-h6-O8R" secondAttribute="leading" id="f3A-uZ-uzt"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="top" secondItem="Nak-CV-Z7L" secondAttribute="bottom" constant="20" id="mCb-gJ-9Hl"/>
+                    <constraint firstItem="7de-78-fa7" firstAttribute="leading" secondItem="Nak-CV-Z7L" secondAttribute="trailing" id="qeU-dK-XrB"/>
                     <constraint firstItem="Nak-CV-Z7L" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="21" id="uWT-1K-m6T"/>
                     <constraint firstItem="dXc-h6-O8R" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="50" id="wRH-NW-Z8r"/>
                 </constraints>

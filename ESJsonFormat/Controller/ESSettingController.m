@@ -88,8 +88,16 @@
 }
 
 
-- (IBAction)tapGes:(NSClickGestureRecognizer *)sender {
+- (IBAction)tapMJGes:(NSClickGestureRecognizer *)sender {
+
     NSURL* url = [[ NSURL alloc ] initWithString :@"http://t.cn/RLarUfg"];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+
+
+- (IBAction)tapYYGes:(id)sender {
+    NSURL* url = [[ NSURL alloc ] initWithString :@"http://dwz.cn/3smhbO"];
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
