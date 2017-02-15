@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ESJsonFormatSetting.h"
 @class ESClassInfo;
 @interface ESJsonFormatManager : NSObject
 
@@ -46,7 +47,7 @@
  *
  *  @return
  */
-+ (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo;
++ (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo ImpOjbClassInArrayType:(ImpOjbClassInArrayType)modelType;
 
 
 /**

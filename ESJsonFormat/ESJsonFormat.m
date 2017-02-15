@@ -124,7 +124,7 @@
             
             //输出RootClass的impOjbClassInArray方法
             if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
-                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo];
+                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo ImpOjbClassInArrayType:[ESJsonFormatSetting defaultSetting].impOjbClassInArray];
                 if (methodStr.length) {
                     NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
                     if (lastEndRange.location != NSNotFound) {

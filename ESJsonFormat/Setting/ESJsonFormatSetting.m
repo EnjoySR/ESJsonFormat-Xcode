@@ -9,8 +9,10 @@
 #import "ESJsonFormatSetting.h"
 
 
+
 NSString *const kESJsonFormatGeneric = @"com.EnjoySR.ESJsonFormat.Generic";
 NSString *const kESJsonFormatOutputToFiles = @"com.EnjoySR.ESJsonFormat.OutputToFiles";
+//NSString *const kESJsonFormatImpModelContainerPropertyGenericClass = @"com.EnjoySR.ESJsonFormat.ImpModelContainerPropertyGenericClass";
 NSString *const kESJsonFormatImpObjClassInArray = @"com.EnjoySR.ESJsonFormat.ImpObjClassInArray";
 NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.UppercaseKeyWordForId";
 
@@ -24,7 +26,7 @@ NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.
         defaultSetting = [[ESJsonFormatSetting alloc] init];
         NSDictionary *defaults = @{kESJsonFormatGeneric: @YES,
                                    kESJsonFormatOutputToFiles: @NO,
-                                   kESJsonFormatImpObjClassInArray: @YES,
+                                   kESJsonFormatImpObjClassInArray:[NSNumber numberWithUnsignedInt:ImpOjbClassInArrayType_MJExtension],//@YES,
                                    kESJsonFormatUppercaseKeyWordForId: @NO};
                   [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     });
@@ -40,13 +42,31 @@ NSString *const kESJsonFormatUppercaseKeyWordForId = @"com.EnjoySR.ESJsonFormat.
     return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatGeneric];
 }
 
-- (void)setImpOjbClassInArray:(BOOL)impOjbClassInArray{
-    [[NSUserDefaults standardUserDefaults] setBool:impOjbClassInArray forKey:kESJsonFormatImpObjClassInArray];
+//- (void)setImpModelContainerPropertyGenericClass:(BOOL)impModelContainerPropertyGenericClass{
+//    [[NSUserDefaults standardUserDefaults] setBool:impModelContainerPropertyGenericClass forKey:kESJsonFormatImpModelContainerPropertyGenericClass];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//- (BOOL)impModelContainerPropertyGenericClass{
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatImpModelContainerPropertyGenericClass];
+//}
+
+//- (void)setImpOjbClassInArray:(BOOL)impOjbClassInArray{
+//    [[NSUserDefaults standardUserDefaults] setBool:impOjbClassInArray forKey:kESJsonFormatImpObjClassInArray];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+//
+//- (BOOL)impOjbClassInArray{
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatImpObjClassInArray];
+//}
+
+- (void)setImpOjbClassInArray:(ImpOjbClassInArrayType)impOjbClassInArray{
+    [[NSUserDefaults standardUserDefaults] setInteger:impOjbClassInArray forKey:kESJsonFormatImpObjClassInArray];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL)impOjbClassInArray{
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kESJsonFormatImpObjClassInArray];
+- (ImpOjbClassInArrayType)impOjbClassInArray{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:kESJsonFormatImpObjClassInArray];
 }
 
 - (void)setOutputToFiles:(BOOL)outputToFiles{

@@ -7,13 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef NS_ENUM(NSUInteger , ImpOjbClassInArrayType) {
+    ImpOjbClassInArrayType_None,
+    ImpOjbClassInArrayType_YYModel,
+    ImpOjbClassInArrayType_MJExtension
+    
+};
 @interface ESJsonFormatSetting : NSObject
 
 + (ESJsonFormatSetting *)defaultSetting;
 
 @property BOOL useGeneric;
-@property BOOL impOjbClassInArray;
+//@property BOOL impOjbClassInArray;
+@property ImpOjbClassInArrayType impOjbClassInArray;
+//@property BOOL impModelContainerPropertyGenericClass;
 @property BOOL outputToFiles;
 @property BOOL uppercaseKeyWordForId;
 

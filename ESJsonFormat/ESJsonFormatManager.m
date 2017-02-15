@@ -12,7 +12,7 @@
 #import "ESClassInfo.h"
 #import "ESPair.h"
 #import "ESJsonFormat.h"
-#import "ESJsonFormatSetting.h"
+
 #import "ESPbxprojInfo.h"
 #import "ESClassInfo.h"
 
@@ -167,7 +167,7 @@
     
     NSMutableString *result = [NSMutableString stringWithString:@""];
     if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
-        [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo]];
+        [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo ImpOjbClassInArrayType:[ESJsonFormatSetting defaultSetting].impOjbClassInArray]];
     }else{
         [result appendFormat:@"@implementation %@\n\n@end\n",classInfo.className];
     }
@@ -237,7 +237,7 @@
  *
  *  @return
  */
-+ (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo{
++ (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo ImpOjbClassInArrayType:(ImpOjbClassInArrayType)modelType{
     if (classInfo.propertyArrayDic.count==0) {
         return @"";
     }else{
@@ -250,7 +250,19 @@
             result = [NSMutableString stringWithFormat:@"%@",[result substringToIndex:result.length-2]];
         }
         //append method content (objectClassInArray)
-        NSString *methodStr = [NSString stringWithFormat:@"\n+ (NSDictionary *)objectClassInArray{\n    return @{%@};\n}\n",result];
+        NSString * impString;
+        switch (modelType) {
+            case ImpOjbClassInArrayType_MJExtension:
+                impString = @"objectClassInArray";
+                break;
+            case ImpOjbClassInArrayType_YYModel:
+                impString = @"modelContainerPropertyGenericClass";
+                break;
+                
+            default:
+                break;
+        }
+        NSString *methodStr = [NSString stringWithFormat:@"\n+ (NSDictionary *)%@{\n    return @{%@};\n}\n",impString,result];
         return methodStr;
     }
 }

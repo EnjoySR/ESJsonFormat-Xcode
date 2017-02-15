@@ -11,6 +11,7 @@
 
 @interface ESSettingController ()
 @property (weak) IBOutlet NSButton *btnImpMJExtesion;
+@property (weak) IBOutlet NSButton *btnImpYYModel;
 @property (weak) IBOutlet NSButton *btnGeneric;
 @property (weak) IBOutlet NSButton *btnOutputToFile;
 @property (weak) IBOutlet NSButton *btnUpercaseForId;
@@ -22,8 +23,30 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    
-    self.btnImpMJExtesion.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] impOjbClassInArray];
+    switch ([[ESJsonFormatSetting defaultSetting] impOjbClassInArray]) {
+        case ImpOjbClassInArrayType_None:
+        {
+            self.btnImpMJExtesion.state = NSOffState;
+            self.btnImpYYModel.state = NSOffState;
+        }
+            break;
+        case ImpOjbClassInArrayType_MJExtension:
+        {
+            self.btnImpMJExtesion.state = NSOnState;
+            self.btnImpYYModel.state = NSOffState;
+        }
+            break;
+        case ImpOjbClassInArrayType_YYModel:
+        {
+            self.btnImpMJExtesion.state = NSOffState;
+            self.btnImpYYModel.state = NSOnState;
+        }
+            break;
+            
+        default:
+            break;
+    }
+//    self.btnImpMJExtesion.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] impOjbClassInArray];
     self.btnGeneric.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] useGeneric];
     self.btnOutputToFile.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] outputToFiles];
     self.btnUpercaseForId.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] uppercaseKeyWordForId];
@@ -32,8 +55,24 @@
     }
 }
 
+- (IBAction)btnImpMtdForYYClick:(NSButton *)sender {
+    [[ESJsonFormatSetting defaultSetting] setImpOjbClassInArray:sender.state?ImpOjbClassInArrayType_YYModel:ImpOjbClassInArrayType_None];
+    if (sender.state) {
+        self.btnImpMJExtesion.state = NSOffState;
+        
+        
+//        [self btnImpMtdForMJClick:self.btnImpMJExtesion];
+    }
+    
+}
+
 - (IBAction)btnImpMtdForMJClick:(NSButton *)sender {
-    [[ESJsonFormatSetting defaultSetting] setImpOjbClassInArray:sender.state];
+    [[ESJsonFormatSetting defaultSetting] setImpOjbClassInArray:sender.state?ImpOjbClassInArrayType_MJExtension:ImpOjbClassInArrayType_None];
+    if (sender.state) {
+        self.btnImpYYModel.state = NSOffState;
+//        [self btnImpMtdForYYClick:self.btnImpYYModel];
+    }
+    
 }
 
 - (IBAction)btnUseGenericClick:(NSButton *)sender {
