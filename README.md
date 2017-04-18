@@ -8,7 +8,7 @@
 > * **生成的 MJExtension 框架中objectClassInArray方法(类方法)**
 
 
-####怎么安装：
+#### 怎么安装：
 
 方式1：下载-Xcode打开-Command+B-重启Xcode
 
@@ -17,7 +17,7 @@
 方式3：下载-解压plugin文件夹中zip到`~/Library/Application Support/Developer/Shared/Xcode/Plug-ins`-重启Xcode
 
 
-####怎么使用：
+#### 怎么使用：
 
 Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入JSON-Enter
 
@@ -36,7 +36,7 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 注：输出到文件的内容还需要添加什么的可以联系我，人个认为不用像 JSON Accelerator 一样生成字典转模型的方法以及@synthesize修饰符，建议使用-> [MJExtension](https://github.com/CoderMJLee/MJExtension)，保型模型清爽干净。
 
 
-####功能说明：
+#### 功能说明：
 > -0.1
 
 * 通过JSON字符串生成对应属性
@@ -59,12 +59,12 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 * 支持格式输出到文件
 * 支持格式输出泛型(Xcode 7及之后) 
 
-####Alcatraz
+#### Alcatraz
 * 支持 [Alcatraz](http://alcatraz.io/) ，请搜索 `ESJsonFormat`
 
 ![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/ScreenShot4.jpeg)
 
-####效果：
+#### 效果：
 简单模型
 
 ![Screenshot](https://raw.githubusercontent.com/EnjoySR/ESJsonFormat-Xcode/master/ScreenShot/ScreenShot3.gif)
@@ -107,7 +107,7 @@ Window-ESJsonFormat-输入Json-Enter  **OR**  快捷键(Control+Shift+J)-输入J
 }
 ~~~
 
-####其他：
+#### 其他：
 
 * 如在使用过程中需要到问题，请你Issues我。
 * 有什么好的想法也可以Issues我。
