@@ -6,7 +6,7 @@
 > * **格式化之前光标放在你需要添加属性的地方**
 > * **如果不输出到文件，RootClass需要自己手动创建，插件只负责RootClass里面的属性生成**
 > * **生成的 MJExtension 框架中objectClassInArray方法(类方法)**
-> * **Xcode 8及之后使用插件见：[http://www.cocoachina.com/ios/20161207/18313.html](http://www.cocoachina.com/ios/20161207/18313.html)
+> * **Xcode 8及之后使用插件见：[http://www.cocoachina.com/ios/20161207/18313.html](http://www.cocoachina.com/ios/20161207/18313.html)**
 
 
 #### 怎么安装：
