@@ -1,4 +1,7 @@
 ### ESJsonFormat-Xcode
+
+Xcode8上暂时无法使用,推荐替代产品：https://github.com/Ahmed-Ali/JSONExport
+
 将JSON格式化输出为模型的属性　　　　个人活动范围>[Weibo-EnjoySR](http://weibo.com/EnjoySR)
 
 **写在之前的注意**
