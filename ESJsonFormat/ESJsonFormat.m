@@ -136,6 +136,16 @@
             NSURL *writeUrl = [NSURL URLWithString:urlStr];
             //The original content
             NSString *originalContent = [NSString stringWithContentsOfURL:writeUrl encoding:NSUTF8StringEncoding error:nil];
+            //大写ID时生成对应的映射方法
+            if (ESJsonFormatSetting.defaultSetting.uppercaseKeyWordForId &&
+                (classInfo.classDic[@"id"] || classInfo.classDic[@"ID"]))
+            {
+                NSString *methodStr = @"\n+ (NSDictionary *)replacedKeyFromPropertyName\n{\n    return @{@\"ID\" : @\"id\"};\n}\n";
+                NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
+                if (lastEndRange.location != NSNotFound) {
+                    originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(lastEndRange.location, 0) withString:methodStr];
+                }
+            }
             
             //输出RootClass的impOjbClassInArray方法
             if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
@@ -147,6 +157,7 @@
                     }
                 }
             }
+            
             originalContent = [originalContent stringByReplacingCharactersInRange:NSMakeRange(originalContent.length, 0) withString:classInfo.classInsertTextViewContentForM];
             [originalContent writeToURL:writeUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
             
