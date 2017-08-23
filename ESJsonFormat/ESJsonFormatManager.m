@@ -167,9 +167,30 @@
     
     NSMutableString *result = [NSMutableString stringWithString:@""];
     if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
-        [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo]];
+        if (ESJsonFormatSetting.defaultSetting.uppercaseKeyWordForId &&
+            (classInfo.classDic[@"id"] || classInfo.classDic[@"ID"]))
+        {
+            NSString *methodStr = @"\n+ (NSDictionary *)replacedKeyFromPropertyName\n{\n    return @{@\"ID\" : @\"id\"};\n}\n";
+            [result appendFormat:@"@implementation %@\n%@\n\n%@\n@end\n",classInfo.className,methodStr,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo]];
+        }
+        else
+        {
+           [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo]];
+        }
+        
     }else{
-        [result appendFormat:@"@implementation %@\n\n@end\n",classInfo.className];
+        if (ESJsonFormatSetting.defaultSetting.uppercaseKeyWordForId &&
+            (classInfo.classDic[@"id"] || classInfo.classDic[@"ID"]))
+        {
+            NSString *methodStr = @"\n+ (NSDictionary *)replacedKeyFromPropertyName\n{\n    return @{@\"ID\" : @\"id\"};\n}\n";
+            [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,methodStr];
+           
+        }
+        else
+        {
+           [result appendFormat:@"@implementation %@\n\n@end\n",classInfo.className];
+        }
+        
     }
     
     if ([ESJsonFormatSetting defaultSetting].outputToFiles) {
