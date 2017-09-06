@@ -1,0 +1,35 @@
+//
+//  ESJsonFormatSetting.h
+//  ESJsonFormat
+//
+//  Created by 尹桥印 on 15/7/19.
+//  Copyright (c) 2015年 EnjoySR. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+<<<<<<< HEAD
+typedef NS_ENUM(NSUInteger , ImpOjbClassInArrayType) {
+    ImpOjbClassInArrayType_None,
+    ImpOjbClassInArrayType_YYModel,
+    ImpOjbClassInArrayType_MJExtension
+    
+};
+=======
+
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+@interface ESJsonFormatSetting : NSObject
+
++ (ESJsonFormatSetting *)defaultSetting;
+
+@property BOOL useGeneric;
+<<<<<<< HEAD
+//@property BOOL impOjbClassInArray;
+@property ImpOjbClassInArrayType impOjbClassInArray;
+//@property BOOL impModelContainerPropertyGenericClass;
+=======
+@property BOOL impOjbClassInArray;
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+@property BOOL outputToFiles;
+@property BOOL uppercaseKeyWordForId;
+
+@end

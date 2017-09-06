@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFile</key>
+	<string></string>
+	<key>CFBundleIdentifier</key>
+	<string>com.enjoy.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>DVTPlugInCompatibilityUUIDs</key>
+	<array>
+		<string>AABB7188-E14E-4433-AD3B-5CD791EAD9A3</string>
+<<<<<<< HEAD
+=======
+		<string>1637F4D5-0B27-416B-A78D-498965D64877</string>
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+		<string>F41BD31E-2683-44B8-AE7F-5F09E919790E</string>
+		<string>992275C1-432A-4CF7-B659-D84ED6D42D3F</string>
+		<string>7FDF5C7A-131F-4ABB-9EDC-8C5F8F0B8A90</string>
+		<string>C4A681B0-4A26-480E-93EC-1218098B9AA0</string>
+		<string>AD68E85B-441B-4301-B564-A45E4919A6AD</string>
+		<string>A16FF353-8441-459E-A50C-B071F53F51B7</string>
+		<string>9F75337B-21B4-4ADC-B558-F9CADF7073A7</string>
+		<string>E969541F-E6F9-4D25-8158-72DC3545A6C6</string>
+		<string>0420B86A-AA43-4792-9ED0-6FE0F2B16A13</string>
+		<string>7265231C-39B4-402C-89E1-16167C4CC990</string>
+		<string>ACA8656B-FEA8-4B6D-8E4A-93F4C95C362C</string>
+<<<<<<< HEAD
+		<string>DA4FDFD8-C509-4D8B-8B55-84A7B66AE701</string>
+		<string>E0A62D1F-3C18-4D74-BFE5-A4167D643966</string>
+=======
+		<string>DFFB3951-EB0A-4C09-9DAC-5F2D28CC839C</string>
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+		<string>CA351AD8-3176-41CB-875C-42A05C7CDEC7</string>
+	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>NSPrincipalClass</key>
+	<string>ESJsonFormat</string>
+	<key>XC4Compatible</key>
+	<true/>
+	<key>XCPluginHasUI</key>
+	<false/>
+</dict>
+</plist>

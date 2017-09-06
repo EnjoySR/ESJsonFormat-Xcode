@@ -50,8 +50,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:NSTextViewDidChangeSelectionNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEEditorDocumentDidChangeNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"PBXProjectDidOpenNotification" object:nil];
+<<<<<<< HEAD
+=======
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"SourceEditorSelectedSourceRangeChangedNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEWorkspaceDocumentWillWriteStateDataNotification" object:nil];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     }
     instance = self;
     return self;
@@ -59,10 +62,16 @@
 
 - (void)notificationLog:(NSNotification *)notify
 {
+<<<<<<< HEAD
+    if (!self.notiTag) return;
+    if ([notify.name isEqualToString:NSTextViewDidChangeSelectionNotification]) {
+        if ([notify.object isKindOfClass:[NSTextView class]]) {
+=======
 
     if (!self.notiTag) return;
     if ([notify.name isEqualToString:NSTextViewDidChangeSelectionNotification]) {
         if ([notify.object isKindOfClass:NSClassFromString(@"DVTSourceTextView")]) {
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
             NSTextView *text = (NSTextView *)notify.object;
             self.currentTextView = text;
         }
@@ -82,6 +91,9 @@
     }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
         self.currentProjectPath = [notify.object valueForKey:@"path"];
         [[ESPbxprojInfo shareInstance] setParamsWithPath:[self.currentProjectPath stringByAppendingPathComponent:@"project.pbxproj"]];
+<<<<<<< HEAD
+    }
+=======
     }else if ([notify.name isEqualToString:@"SourceEditorSelectedSourceRangeChangedNotification"]) {
         // 适配 Xcode 9，在Xcode 9 中代码编辑区域的 View 类型如下，继承于 NSView，但使用方式与 NSTextView 类似
         if ([notify.object isKindOfClass:NSClassFromString(@"IDEPegasusSourceEditor.SourceCodeEditorView")]) {
@@ -95,6 +107,7 @@
         }
     }
     
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
 }
 
 -(void)outputResult:(NSNotification*)noti{
@@ -139,7 +152,11 @@
             
             //输出RootClass的impOjbClassInArray方法
             if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
+<<<<<<< HEAD
                 NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo ImpOjbClassInArrayType:[ESJsonFormatSetting defaultSetting].impOjbClassInArray];
+=======
+                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
                 if (methodStr.length) {
                     NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
                     if (lastEndRange.location != NSNotFound) {
