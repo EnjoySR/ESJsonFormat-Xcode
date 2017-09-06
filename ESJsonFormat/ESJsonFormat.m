@@ -50,6 +50,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:NSTextViewDidChangeSelectionNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEEditorDocumentDidChangeNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"PBXProjectDidOpenNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"SourceEditorSelectedSourceRangeChangedNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLog:) name:@"IDEWorkspaceDocumentWillWriteStateDataNotification" object:nil];
     }
     instance = self;
     return self;
@@ -57,9 +59,10 @@
 
 - (void)notificationLog:(NSNotification *)notify
 {
+
     if (!self.notiTag) return;
     if ([notify.name isEqualToString:NSTextViewDidChangeSelectionNotification]) {
-        if ([notify.object isKindOfClass:[NSTextView class]]) {
+        if ([notify.object isKindOfClass:NSClassFromString(@"DVTSourceTextView")]) {
             NSTextView *text = (NSTextView *)notify.object;
             self.currentTextView = text;
         }
@@ -79,7 +82,19 @@
     }else if ([notify.name isEqualToString:@"PBXProjectDidOpenNotification"]){
         self.currentProjectPath = [notify.object valueForKey:@"path"];
         [[ESPbxprojInfo shareInstance] setParamsWithPath:[self.currentProjectPath stringByAppendingPathComponent:@"project.pbxproj"]];
+    }else if ([notify.name isEqualToString:@"SourceEditorSelectedSourceRangeChangedNotification"]) {
+        // 适配 Xcode 9，在Xcode 9 中代码编辑区域的 View 类型如下，继承于 NSView，但使用方式与 NSTextView 类似
+        if ([notify.object isKindOfClass:NSClassFromString(@"IDEPegasusSourceEditor.SourceCodeEditorView")]) {
+            self.currentTextView = notify.object;
+        }
+    }else if ([notify.name isEqualToString:@"IDEWorkspaceDocumentWillWriteStateDataNotification"]) {
+        NSArray *recentEditorDocumentURLs = [notify.object valueForKey:@"_recentEditorDocumentURLs"];
+        NSString *path = [recentEditorDocumentURLs.firstObject absoluteString];
+        if ([path hasPrefix:@"file"]) {
+            self.currentFilePath = path;
+        }
     }
+    
 }
 
 -(void)outputResult:(NSNotification*)noti{
@@ -124,7 +139,7 @@
             
             //输出RootClass的impOjbClassInArray方法
             if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
-                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo ImpOjbClassInArrayType:[ESJsonFormatSetting defaultSetting].impOjbClassInArray];
+                NSString *methodStr = [ESJsonFormatManager methodContentOfObjectClassInArrayWithClassInfo:classInfo];
                 if (methodStr.length) {
                     NSRange lastEndRange = [originalContent rangeOfString:@"@end"];
                     if (lastEndRange.location != NSNotFound) {

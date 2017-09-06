@@ -12,7 +12,7 @@
 #import "ESClassInfo.h"
 #import "ESPair.h"
 #import "ESJsonFormat.h"
-
+#import "ESJsonFormatSetting.h"
 #import "ESPbxprojInfo.h"
 #import "ESClassInfo.h"
 
@@ -116,13 +116,13 @@
  *  @return
  */
 + (NSString *)formatSwiftWithKey:(NSString *)key value:(NSObject *)value classInfo:(ESClassInfo *)classInfo{
-    NSString *typeStr = @"String?";
+    NSString *typeStr = @"String";
     //判断大小写
     if ([ESUppercaseKeyWords containsObject:key] && [ESJsonFormatSetting defaultSetting].uppercaseKeyWordForId) {
         key = [key uppercaseString];
     }
     if ([value isKindOfClass:[NSString class]]) {
-        return [NSString stringWithFormat:@"    var %@: %@",key,typeStr];
+        return [NSString stringWithFormat:@"    var %@: %@ = \"\"",key,typeStr];
     }else if([value isKindOfClass:[@(YES) class]]){
         typeStr = @"Bool";
         return [NSString stringWithFormat:@"    var %@: %@ = false",key,typeStr];
