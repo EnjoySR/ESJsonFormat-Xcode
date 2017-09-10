@@ -1,6 +1,6 @@
 ## 新增功能-------------------------------------------------------
 
-### 添加 8.1 8.2（8.2.1）的支持，需要自签名 Xcode
+###  Xcode9-beta 以前的应该都支持（但需要先自签名 Xcode）
 
 ### 添加 YYModel 支持，不影响 MJExtension 支持
 ![image](https://cloud.githubusercontent.com/assets/13959880/22986169/a6647b9e-f3e5-11e6-90fc-71eceb861211.png)
