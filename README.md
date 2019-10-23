@@ -1,3 +1,4 @@
+## 不再使用OC了，如果对swift 感兴趣可以看看自己开源的Xcode插件 https://github.com/tanpengsccd/TPJSONFormatter
 ## 新增功能-------------------------------------------------------
 
 ###  Xcode9-beta 以前的应该都支持（但需要先自签名 Xcode）
