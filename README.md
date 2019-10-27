@@ -1,3 +1,12 @@
+## 不再使用OC了，如果对swift 感兴趣可以看看自己开源的Xcode插件 https://github.com/tanpengsccd/TPJSONFormatter
+## 新增功能-------------------------------------------------------
+
+###  Xcode9-beta 以前的应该都支持（但需要先自签名 Xcode）
+
+### 添加 YYModel 支持，不影响 MJExtension 支持
+![image](https://cloud.githubusercontent.com/assets/13959880/22986169/a6647b9e-f3e5-11e6-90fc-71eceb861211.png)
+## 以下为EnjoySR 原作的介绍----------------------------------------
+
 ### ESJsonFormat-Xcode
 将JSON格式化输出为模型的属性　　　　个人活动范围>[Weibo-EnjoySR](http://weibo.com/EnjoySR)
 

@@ -11,7 +11,10 @@
 
 @interface ESSettingController ()
 @property (weak) IBOutlet NSButton *btnImpMJExtesion;
+<<<<<<< HEAD
 @property (weak) IBOutlet NSButton *btnImpYYModel;
+=======
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
 @property (weak) IBOutlet NSButton *btnGeneric;
 @property (weak) IBOutlet NSButton *btnOutputToFile;
 @property (weak) IBOutlet NSButton *btnUpercaseForId;
@@ -23,6 +26,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+<<<<<<< HEAD
     switch ([[ESJsonFormatSetting defaultSetting] impOjbClassInArray]) {
         case ImpOjbClassInArrayType_None:
         {
@@ -47,6 +51,10 @@
             break;
     }
 //    self.btnImpMJExtesion.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] impOjbClassInArray];
+=======
+    
+    self.btnImpMJExtesion.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] impOjbClassInArray];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     self.btnGeneric.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] useGeneric];
     self.btnOutputToFile.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] outputToFiles];
     self.btnUpercaseForId.state = (NSCellStateValue)[[ESJsonFormatSetting defaultSetting] uppercaseKeyWordForId];
@@ -55,6 +63,7 @@
     }
 }
 
+<<<<<<< HEAD
 - (IBAction)btnImpMtdForYYClick:(NSButton *)sender {
     [[ESJsonFormatSetting defaultSetting] setImpOjbClassInArray:sender.state?ImpOjbClassInArrayType_YYModel:ImpOjbClassInArrayType_None];
     if (sender.state) {
@@ -73,6 +82,10 @@
 //        [self btnImpMtdForYYClick:self.btnImpYYModel];
     }
     
+=======
+- (IBAction)btnImpMtdForMJClick:(NSButton *)sender {
+    [[ESJsonFormatSetting defaultSetting] setImpOjbClassInArray:sender.state];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
 }
 
 - (IBAction)btnUseGenericClick:(NSButton *)sender {
@@ -88,14 +101,19 @@
 }
 
 
+<<<<<<< HEAD
 - (IBAction)tapMJGes:(NSClickGestureRecognizer *)sender {
 
+=======
+- (IBAction)tapGes:(NSClickGestureRecognizer *)sender {
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     NSURL* url = [[ NSURL alloc ] initWithString :@"http://t.cn/RLarUfg"];
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 
 
+<<<<<<< HEAD
 - (IBAction)tapYYGes:(id)sender {
     NSURL* url = [[ NSURL alloc ] initWithString :@"http://dwz.cn/3smhbO"];
     [[NSWorkspace sharedWorkspace] openURL:url];
@@ -103,4 +121,6 @@
 
 
 
+=======
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
 @end

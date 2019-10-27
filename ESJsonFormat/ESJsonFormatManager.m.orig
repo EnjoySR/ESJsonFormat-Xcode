@@ -12,7 +12,11 @@
 #import "ESClassInfo.h"
 #import "ESPair.h"
 #import "ESJsonFormat.h"
+<<<<<<< HEAD
+
+=======
 #import "ESJsonFormatSetting.h"
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
 #import "ESPbxprojInfo.h"
 #import "ESClassInfo.h"
 
@@ -116,13 +120,21 @@
  *  @return
  */
 + (NSString *)formatSwiftWithKey:(NSString *)key value:(NSObject *)value classInfo:(ESClassInfo *)classInfo{
+<<<<<<< HEAD
+    NSString *typeStr = @"String?";
+=======
     NSString *typeStr = @"String";
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     //判断大小写
     if ([ESUppercaseKeyWords containsObject:key] && [ESJsonFormatSetting defaultSetting].uppercaseKeyWordForId) {
         key = [key uppercaseString];
     }
     if ([value isKindOfClass:[NSString class]]) {
+<<<<<<< HEAD
+        return [NSString stringWithFormat:@"    var %@: %@",key,typeStr];
+=======
         return [NSString stringWithFormat:@"    var %@: %@ = \"\"",key,typeStr];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     }else if([value isKindOfClass:[@(YES) class]]){
         typeStr = @"Bool";
         return [NSString stringWithFormat:@"    var %@: %@ = false",key,typeStr];
@@ -167,7 +179,11 @@
     
     NSMutableString *result = [NSMutableString stringWithString:@""];
     if ([ESJsonFormatSetting defaultSetting].impOjbClassInArray) {
+<<<<<<< HEAD
         [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo ImpOjbClassInArrayType:[ESJsonFormatSetting defaultSetting].impOjbClassInArray]];
+=======
+        [result appendFormat:@"@implementation %@\n%@\n@end\n",classInfo.className,[self methodContentOfObjectClassInArrayWithClassInfo:classInfo]];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     }else{
         [result appendFormat:@"@implementation %@\n\n@end\n",classInfo.className];
     }
@@ -237,7 +253,11 @@
  *
  *  @return
  */
+<<<<<<< HEAD
 + (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo ImpOjbClassInArrayType:(ImpOjbClassInArrayType)modelType{
+=======
++ (NSString *)methodContentOfObjectClassInArrayWithClassInfo:(ESClassInfo *)classInfo{
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
     if (classInfo.propertyArrayDic.count==0) {
         return @"";
     }else{
@@ -250,6 +270,7 @@
             result = [NSMutableString stringWithFormat:@"%@",[result substringToIndex:result.length-2]];
         }
         //append method content (objectClassInArray)
+<<<<<<< HEAD
         NSString * impString;
         switch (modelType) {
             case ImpOjbClassInArrayType_MJExtension:
@@ -263,6 +284,9 @@
                 break;
         }
         NSString *methodStr = [NSString stringWithFormat:@"\n+ (NSDictionary *)%@{\n    return @{%@};\n}\n",impString,result];
+=======
+        NSString *methodStr = [NSString stringWithFormat:@"\n+ (NSDictionary *)objectClassInArray{\n    return @{%@};\n}\n",result];
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
         return methodStr;
     }
 }

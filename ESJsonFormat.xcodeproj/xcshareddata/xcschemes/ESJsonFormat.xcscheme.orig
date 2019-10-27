@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0500"
+   version = "2.0">
+   <BuildAction
+      parallelizeBuildables = "NO"
+      buildImplicitDependencies = "NO">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4FF8F3391B400F8B005C73C2"
+               BuildableName = "ESJsonFormat.xcplugin"
+               BlueprintName = "ESJsonFormat"
+               ReferencedContainer = "container:ESJsonFormat.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8966AFCA173EB7BF004150C0"
+               BuildableName = "ESJsonFormatTests.xctest"
+               BlueprintName = "ESJsonFormatTests"
+               ReferencedContainer = "container:ESJsonFormat.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+<<<<<<< HEAD
+      buildConfiguration = "Release"
+=======
+      buildConfiguration = "Debug"
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "NO"
+      debugXPCServices = "NO"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "NO"
+      viewDebuggingEnabled = "No">
+<<<<<<< HEAD
+=======
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         FilePath = "/Applications/Xcode-beta.app">
+      </PathRunnable>
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "4FF8F3391B400F8B005C73C2"
+            BuildableName = "ESJsonFormat.xcplugin"
+            BlueprintName = "ESJsonFormat"
+            ReferencedContainer = "container:ESJsonFormat.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

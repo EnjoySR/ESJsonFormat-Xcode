@@ -1,0 +1,112 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ESInputJsonController">
+            <connections>
+                <outlet property="cancelButton" destination="Fkf-zu-ER8" id="7Q3-wI-3FI"/>
+                <outlet property="enterButton" destination="dcK-H9-JYv" id="Yns-8u-ChD"/>
+                <outlet property="inputTextView" destination="r1a-GN-ZV2" id="UWG-s3-Lwx"/>
+                <outlet property="scrollView" destination="1MB-V1-NpX" id="37X-ug-tuB"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Input your json" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="768" y="530" width="400" height="400"/>
+<<<<<<< HEAD
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+=======
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+>>>>>>> 761e20d0334233346748565e58affb4ab5b04c23
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="1" width="400" height="400"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcK-H9-JYv">
+                        <rect key="frame" x="315" y="-4" width="82" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="Mq8-cd-q0s"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Enter" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aeX-a5-hlQ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="enterButtonClick:" target="-2" id="Rvl-Db-WyF"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fkf-zu-ER8">
+                        <rect key="frame" x="233" y="-4" width="82" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="06H-KT-fZq"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uIm-cj-Udd">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelButtonClick:" target="-2" id="MC5-TF-RNw"/>
+                        </connections>
+                    </button>
+                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MB-V1-NpX">
+                        <rect key="frame" x="0.0" y="26" width="400" height="374"/>
+                        <clipView key="contentView" id="YjX-XF-Yb3">
+                            <rect key="frame" x="1" y="1" width="223" height="133"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="r1a-GN-ZV2">
+                                    <rect key="frame" x="0.0" y="0.0" width="223" height="374"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="400" height="374"/>
+                                    <size key="maxSize" width="500" height="10000000"/>
+                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="400" height="374"/>
+                                    <size key="maxSize" width="500" height="10000000"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bhg-B2-8px">
+                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="STs-07-qha">
+                            <rect key="frame" x="224" y="1" width="15" height="133"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Fkf-zu-ER8" secondAttribute="bottom" constant="3" id="5tE-Fx-bFm"/>
+                    <constraint firstItem="1MB-V1-NpX" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="7T4-mr-GVz"/>
+                    <constraint firstAttribute="trailing" secondItem="dcK-H9-JYv" secondAttribute="trailing" constant="9" id="K9o-yd-omk"/>
+                    <constraint firstAttribute="bottom" secondItem="dcK-H9-JYv" secondAttribute="bottom" constant="3" id="g31-LD-yvQ"/>
+                    <constraint firstItem="Fkf-zu-ER8" firstAttribute="top" secondItem="1MB-V1-NpX" secondAttribute="bottom" constant="2" id="gRD-oI-gbE"/>
+                    <constraint firstAttribute="trailing" secondItem="1MB-V1-NpX" secondAttribute="trailing" id="pw8-oV-bSw"/>
+                    <constraint firstItem="dcK-H9-JYv" firstAttribute="leading" secondItem="Fkf-zu-ER8" secondAttribute="trailing" constant="12" id="r9J-HY-phA"/>
+                    <constraint firstItem="1MB-V1-NpX" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="zQr-qo-CKI"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="216" y="313"/>
+        </window>
+    </objects>
+</document>
